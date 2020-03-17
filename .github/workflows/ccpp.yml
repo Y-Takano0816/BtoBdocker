@@ -17,3 +17,5 @@ jobs:
       run: g++ -o hello hello_world.cpp
     - name: run
       run: ./hello
+    - name: who
+      run: who
