@@ -16,4 +16,4 @@ jobs:
     - name: build
       run: g++ -o hello hello_world.cpp
     - name: run
-      run: .hello.out
+      run: . hello.out
