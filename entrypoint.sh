@@ -1,5 +1,6 @@
 #!/bin/sh -l
-export
+
+which g++
 g++ -o hello hello_world.cpp
 ./hello
 echo "Hello"
