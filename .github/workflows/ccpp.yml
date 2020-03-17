@@ -13,7 +13,7 @@ jobs:
     
     steps:
     - uses: actions/checkout@v2
-    - name: make
+    - name: build
       run: g++ -o hello hello_world.cpp
-    - name: make check
-      run: ./ hello.out
+    - name: run
+      run: .hello.out
