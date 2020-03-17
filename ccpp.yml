@@ -1,24 +1,4 @@
-name: C/C++ CI
-
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
-jobs:
-  build:
-
-    runs-on: ubuntu-latest
-    
-    steps:
-    - uses: actions/checkout@v2
-    - name: build
-      run: g++ -o hello hello_world.cpp
-    - name: run
-      run: ./hello
-    - name: who
-      run: who
+name: 'C/C++ CI'
 runs:
   using: 'docker'
   image: 'Dockerfile'
