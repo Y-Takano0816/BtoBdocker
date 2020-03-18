@@ -1,5 +1,5 @@
 # コードを実行するコンテナイメージ
-FROM windows:1903
+FROM ubuntu:18.04
 
 # アクションのリポジトリからコードファイルをファイルシステムパスへコピー`/` of the container
 COPY entrypoint.sh /entrypoint.sh
