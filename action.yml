@@ -9,7 +9,7 @@ inputs:
 outputs:
   time: # id of output
     description: 'The time we greeted you'
-runs:
+runs1:
   using: 'docker'
   image: 'Dockerfile'
 runs:
