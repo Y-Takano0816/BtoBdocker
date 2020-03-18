@@ -13,6 +13,7 @@ runs1:
   using: 'docker'
   image: 'Dockerfile'
 runs:
+  echo test
   using: 'docker'
   image: 'Dockerfile'
   args:
