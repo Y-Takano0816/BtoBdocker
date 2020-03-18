@@ -9,12 +9,11 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+    - name: test test
+      uses: ./test/
     - name: linux test
       uses: ./
       id: hello
-    - name: test test
-      uses: ./test/
-
 #       with:
 #         who-to-greet: 'Mona the Octocat'
 #     # Use the output from the `hello` step
