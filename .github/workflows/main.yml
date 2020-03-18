@@ -10,8 +10,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Hello world action step
-      uses: ./test/
+      uses: ./
       id: hello
+    - name: Hello world action step
+      uses: ./test/
+
 #       with:
 #         who-to-greet: 'Mona the Octocat'
 #     # Use the output from the `hello` step
