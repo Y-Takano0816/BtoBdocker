@@ -2,4 +2,4 @@
 
 g++ -o hello hello_world.cpp
 ./hello
-echo "Hello"
+echo "Hello $1"
