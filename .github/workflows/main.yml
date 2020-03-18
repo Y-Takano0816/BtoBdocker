@@ -9,10 +9,10 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Hello world action step
+    - name: linux test
       uses: ./
       id: hello
-    - name: Hello world action step
+    - name: test test
       uses: ./test/
 
 #       with:
