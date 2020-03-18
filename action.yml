@@ -15,6 +15,6 @@ runs:
   args:
     - ${{ inputs.who-to-greet }}
 
-  using: 'docker'
-  image: 'test/Dockerfile'
+  using2: 'docker'
+  image2: 'test/Dockerfile'
 
