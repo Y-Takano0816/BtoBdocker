@@ -1,6 +1,6 @@
 # コードを実行するコンテナイメージ
 #FROM alpine:3.10
-FROM mcr.microsoft.com/windows
+FROM microsoft.com/windows
 FROM gcc:8.4.0
 # アクションのリポジトリからコードファイルをファイルシステムパスへコピー`/` of the container
 COPY entrypoint.sh /entrypoint.sh
