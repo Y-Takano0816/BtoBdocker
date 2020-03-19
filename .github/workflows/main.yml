@@ -23,7 +23,7 @@ jobs:
     - name: ls
       run: ls -R
     - name: ls
-      run: ls -R | grep eloquent
+      run: pwd
 #     - name: ros2setupbash
 #       run: cd ..
 #     - name: ls1
@@ -50,8 +50,8 @@ jobs:
 #       if: always()
 #     - name: cd
 #       uses: cd /opt/
-#     - name: run doctor
-#       run: ros2 doctor --report
+    - name: run doctor
+      run: ros2 doctor --report
 #       with:
 #         who-to-greet: 'Mona the Octocat'
 #     # Use the output from the `hello` step
