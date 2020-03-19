@@ -3,9 +3,9 @@ name: 'main'
 on: [push]
 
 jobs:
-  hello_world_job:
-    runs-on: ubuntu-latest
-    name: A job to say hello
+  ros2setup:                                        #jobid
+    runs-on: ubuntu-latest                          
+    name: ros2setup
     steps:
 #     - name: Checkout
 #       uses: actions/checkout@v2
@@ -14,8 +14,6 @@ jobs:
 #     - name: linux test
 #       uses: ./
 #       id: hello
-#     - name: exp
-#       run: export
     - name: Setup ROS2
       uses: ros-tooling/setup-ros@0.0.15
       with: 
@@ -25,14 +23,39 @@ jobs:
         source /opt/ros/eloquent/setup.bash
         export
         ros2 doctor --report
-    - run: | 
-        source /opt/ros/eloquent/setup.bash
-        ros2 run demo_nodes_cpp talker
-    timeout-minutes: 1
-#     - run: |
+#     - run: | 
 #         source /opt/ros/eloquent/setup.bash
-#         ros2 run demo_nodes_cpp listener
+#         ros2 run demo_nodes_cpp talker
 #     timeout-minutes: 1
+#                           - run: |
+#        source /opt/ros/eloquent/setup.bash
+#        ros2 run demo_nodes_cpp listener
+
+# jobs: 
+#   listener:
+  talker:
+    needs: ros2setup
+    runs-on: ubuntu-latest
+    name: talker
+    steps:
+      - run: |
+          source /opt/ros/eloquent/setup.bash
+          ros2 run demo_nodes_cpp talker
+        timeout-minutes: 1
+          
+  listener:
+    needs: [ros2setup]
+    runs-on: [ubuntu-latest]
+    name: listener
+    steps:
+      - run: |
+          source /opt/ros/eloquent/setup.bash
+          ros2 run demo_nodes_cpp listener
+        timeout-minutes: 1
+    
+
+
+
 #     name: A job to say hello1
 #     steps:
 #     - run: |
@@ -41,23 +64,7 @@ jobs:
 #         timeout-minutes: 1
    
 
-#     - name: exp
-#       run: export
-#     - name: ls
-#       run: ls -l /opt/ros/eloquent
-#     - name: ls
-#       run: pwd
-#     - name: ros2setupbash
-#       run: cd ..
-#     - name: ls1
-#       run: ls
-#     - name: cd1
-#       run: cd ..
-#     - name: ls2
-#       run: ls
-#     - name: cd2
-#       run: cd eloquent    
-#     - name: Run Tests
+
 #       uses: ros-tooling/action-ros-ci@0.0.13
 #       with:
 #         package-name: example_package
@@ -68,10 +75,6 @@ jobs:
 #         name: colcon-logs
 #         path: ros_ws/log
 #       if: always()
-#     - name: cd
-#       uses: cd /opt/
-#     - name: run doctor
-#       run: ros2 doctor --report
 #       with:
 #         who-to-greet: 'Mona the Octocat'
 #     # Use the output from the `hello` step
