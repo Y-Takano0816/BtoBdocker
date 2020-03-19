@@ -20,6 +20,8 @@ jobs:
       uses: ros-tooling/setup-ros@0.0.15
       with: 
         required-ros-distributions: eloquent
+    - name: ls3
+      run: "source /opt/ros/eloquent/setup.bash"    
     - name: exp
       run: export
     - name: ls
@@ -35,10 +37,7 @@ jobs:
 #     - name: ls2
 #       run: ls
 #     - name: cd2
-#       run: cd eloquent
-#     - name: ls3
-#       run: ls
-#       source /opt/ros/eloquent/setup.bash        
+#       run: cd eloquent    
 #     - name: Run Tests
 #       uses: ros-tooling/action-ros-ci@0.0.13
 #       with:
