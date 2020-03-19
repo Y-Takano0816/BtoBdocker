@@ -16,13 +16,16 @@ jobs:
 #       id: hello
     - name: exp
       run: export
-    - name: Setup ROS2
-      uses: ros-tooling/setup-ros@0.0.15
-      with: 
-          required-ros-distributions: eloquent
-        
-    - name: ls3
-      run: "source /opt/ros/eloquent/setup.bash"    
+#     - name: Setup ROS2
+#       uses: ros-tooling/setup-ros@0.0.15
+#       with: 
+#           required-ros-distributions: eloquent
+    - uses: ros-tooling/setup-ros@0.0.11
+      with:
+        required-ros-distributions: melodic dashing
+    - run: "source /opt/ros/dashing/setup.bash && ros run --help"
+#     - name: ls3
+#       run: "source /opt/ros/eloquent/setup.bash"    
     - name: exp
       run: export
     - name: ls
