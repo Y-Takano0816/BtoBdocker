@@ -3,25 +3,41 @@ name: 'main'
 on: [push]
 
 jobs:
-  ros2setup:                                        #jobid
-    runs-on: ubuntu-latest                          
-    strategy:
-      matrix:
-        node: [talker, listener]
-      max-parallel: 2
-    name: ros2setup
+  start:
+    runs-on: ubuntu-latest 
     steps:
-
+      - run: echo start
+  ros2setup_talker:                                        #jobid
+    needs: [start]
+    runs-on: ubuntu-latest                          
+#     strategy:
+#       matrix:
+#         node: [talker, listener]
+#       max-parallel: 2
+    name: ros2setup_talker
+    steps:
     - name: Setup ROS2
-      id: setup
       uses: ros-tooling/setup-ros@0.0.15
       with: 
           required-ros-distributions: eloquent
-    - name: talker&listener
+    - name: talker
       run: |
         source /opt/ros/eloquent/setup.bash
         ros2 run demo_nodes_cpp ${{matrix.node}}
       timeout-minutes: 1
+  ros2setup_listener:
+    needs: [start]
+    runs-on: [ubuntu-latest]
+    name: ros2setup_listener
+    steps:
+      - name: Setup ROS2
+        uses: ros-tooling/setup-ros@0.0.15
+        with: 
+            required-ros-distributions: eloquent
+      - name: listener
+        run: |
+          source /opt/ros/eloquent/setup.bash
+          ros2 run demo_nodes_cpp listener
 #     - name: Checkout
 #       uses: actions/checkout@v2
 #     - name: test test
