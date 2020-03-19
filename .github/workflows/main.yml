@@ -25,14 +25,14 @@ jobs:
         source /opt/ros/eloquent/setup.bash
         export
         ros2 doctor --report
-    - run: |
+    - run: | 
         source /opt/ros/eloquent/setup.bash
         ros2 run demo_nodes_cpp talker
-        timeout-minutes: 1
-    - run: |
-        source /opt/ros/eloquent/setup.bash
-        ros2 run demo_nodes_cpp listener
-        timeout-minutes: 1
+    timeout-minutes: 1
+#     - run: |
+#         source /opt/ros/eloquent/setup.bash
+#         ros2 run demo_nodes_cpp listener
+#     timeout-minutes: 1
 #     name: A job to say hello1
 #     steps:
 #     - run: |
