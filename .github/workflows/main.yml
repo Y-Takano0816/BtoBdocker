@@ -14,20 +14,23 @@ jobs:
 #     - name: linux test
 #       uses: ./
 #       id: hello
-    - name: exp
-      run: export
+#     - name: exp
+#       run: export
     - name: Setup ROS2
       uses: ros-tooling/setup-ros@0.0.15
       with: 
           required-ros-distributions: eloquent
     - name: ls3
-      run: ". /opt/ros/eloquent/setup.bash"    
-    - name: exp
-      run: export
-    - name: ls
-      run: ls -l /opt/ros/eloquent
-    - name: ls
-      run: pwd
+      run: |
+        source /opt/ros/eloquent/setup.bash
+        export
+        ros2 doctor --report
+#     - name: exp
+#       run: export
+#     - name: ls
+#       run: ls -l /opt/ros/eloquent
+#     - name: ls
+#       run: pwd
 #     - name: ros2setupbash
 #       run: cd ..
 #     - name: ls1
@@ -51,8 +54,8 @@ jobs:
 #       if: always()
 #     - name: cd
 #       uses: cd /opt/
-    - name: run doctor
-      run: ros2 doctor --report
+#     - name: run doctor
+#       run: ros2 doctor --report
 #       with:
 #         who-to-greet: 'Mona the Octocat'
 #     # Use the output from the `hello` step
