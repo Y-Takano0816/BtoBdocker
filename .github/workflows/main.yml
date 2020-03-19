@@ -22,6 +22,7 @@ jobs:
           required-ros-distributions: eloquent
     - name: talker
       run: |
+        ifconfig
         source /opt/ros/eloquent/setup.bash
         ros2 run demo_nodes_cpp talker
 #        ros2 run demo_nodes_cpp ${{matrix.node}}
@@ -37,6 +38,7 @@ jobs:
             required-ros-distributions: eloquent
       - name: listener
         run: |
+          ifconfig
           source /opt/ros/eloquent/setup.bash
           ros2 run demo_nodes_cpp listener
         timeout-minutes: 1
