@@ -5,8 +5,23 @@ on: [push]
 jobs:
   ros2setup:                                        #jobid
     runs-on: ubuntu-latest                          
+    strategy:
+      matrix:
+        node: [talker, listener]
+      max-parallel: 2
     name: ros2setup
     steps:
+
+    - name: Setup ROS2
+      id: setup
+      uses: ros-tooling/setup-ros@0.0.15
+      with: 
+          required-ros-distributions: eloquent
+    - name: talker&listener
+      run: |
+        source /opt/ros/eloquent/setup.bash
+        ros2 run demo_nodes_cpp ${{matrix.node}}
+      timeout-minutes: 1
 #     - name: Checkout
 #       uses: actions/checkout@v2
 #     - name: test test
@@ -14,15 +29,6 @@ jobs:
 #     - name: linux test
 #       uses: ./
 #       id: hello
-    - name: Setup ROS2
-      uses: ros-tooling/setup-ros@0.0.15
-      with: 
-          required-ros-distributions: eloquent
-    - name: ls3
-      run: |
-        source /opt/ros/eloquent/setup.bash
-        export
-        ros2 doctor --report
 #     - run: | 
 #         source /opt/ros/eloquent/setup.bash
 #         ros2 run demo_nodes_cpp talker
@@ -30,28 +36,21 @@ jobs:
 #                           - run: |
 #        source /opt/ros/eloquent/setup.bash
 #        ros2 run demo_nodes_cpp listener
-
-# jobs: 
-#   listener:
-  talker:
-    needs: ros2setup
-    runs-on: ubuntu-latest
-    name: talker
-    steps:
-      - run: |
-          source /opt/ros/eloquent/setup.bash
-          ros2 run demo_nodes_cpp talker
-        timeout-minutes: 1
+#     steps:
+#       - run: |
+#           source /opt/ros/eloquent/setup.bash
+#           ros2 run demo_nodes_cpp talker
+#         timeout-minutes: 1
           
-  listener:
-    needs: [ros2setup]
-    runs-on: [ubuntu-latest]
-    name: listener
-    steps:
-      - run: |
-          source /opt/ros/eloquent/setup.bash
-          ros2 run demo_nodes_cpp listener
-        timeout-minutes: 1
+#   listener:
+#     needs: [ros2setup]
+#     runs-on: [ubuntu-latest]
+#     name: listener
+#     steps:
+#       - run: |
+#           source /opt/ros/eloquent/setup.bash
+#           ros2 run demo_nodes_cpp listener
+#         timeout-minutes: 1
     
 
 
