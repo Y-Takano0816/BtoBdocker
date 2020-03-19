@@ -20,12 +20,12 @@ jobs:
       uses: ros-tooling/setup-ros@0.0.15
       with: 
           required-ros-distributions: eloquent
-#     - name: ls3
-#       run: "source /opt/ros/eloquent/setup.bash"    
+    - name: ls3
+      run: ". /opt/ros/eloquent/setup.bash"    
     - name: exp
       run: export
     - name: ls
-      run: ls -l /opt/ros
+      run: ls -l /opt/ros/eloquent
     - name: ls
       run: pwd
 #     - name: ros2setupbash
