@@ -19,21 +19,21 @@ jobs:
       with: 
         required-ros-distributions: eloquent
     - name: cd
-      run: cd ..
+      run: cd /
     - name: ls
-      run: ls
-    - name: ros2setupbash
-      run: cd ..
-    - name: ls1
-      run: ls
-    - name: cd1
-      run: cd ..
-    - name: ls2
-      run: ls
-    - name: cd2
-      run: cd eloquent
-    - name: ls3
-      run: ls
+      run: ls -aR | grep eloquent
+#     - name: ros2setupbash
+#       run: cd ..
+#     - name: ls1
+#       run: ls
+#     - name: cd1
+#       run: cd ..
+#     - name: ls2
+#       run: ls
+#     - name: cd2
+#       run: cd eloquent
+#     - name: ls3
+#       run: ls
 #       source /opt/ros/eloquent/setup.bash        
 #     - name: Run Tests
 #       uses: ros-tooling/action-ros-ci@0.0.13
