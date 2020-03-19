@@ -18,14 +18,16 @@ jobs:
       uses: ros-tooling/setup-ros@0.0.15
       with: 
         required-ros-distributions: eloquent
+    - name: cd
+      run: cd ..
     - name: ls
       run: ls
     - name: ros2setupbash
-      run: cd /opt/
+      run: cd ..
     - name: ls1
       run: ls
     - name: cd1
-      run: cd /ros
+      run: cd ..
     - name: ls2
       run: ls
     - name: cd2
