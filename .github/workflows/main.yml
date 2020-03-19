@@ -18,8 +18,10 @@ jobs:
       uses: ros-tooling/setup-ros@0.0.15
       with: 
         required-ros-distributions: eloquent
-    - name: run doctor
-      uses: ros2 doctor --report
+    - name: cd
+      uses: cd /opt/
+#     - name: run doctor
+#       uses: ros2 doctor --report
 #       with:
 #         who-to-greet: 'Mona the Octocat'
 #     # Use the output from the `hello` step
