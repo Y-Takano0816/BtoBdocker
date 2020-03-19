@@ -14,12 +14,14 @@ jobs:
 #     - name: linux test
 #       uses: ./
 #       id: hello
+    - name: exp
+      run: export
     - name: Setup ROS2
       uses: ros-tooling/setup-ros@0.0.15
       with: 
         required-ros-distributions: eloquent
-    - name: cd
-      run: cd /
+    - name: exp
+      run: export
     - name: ls
       run: ls -R
     - name: ls
