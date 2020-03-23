@@ -1,6 +1,6 @@
 name: 'main'
 
-on: [push]
+# on: [push]
 
 jobs:
   linux_talker_listener:                                        #jobid                          
