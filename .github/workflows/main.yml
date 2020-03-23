@@ -15,6 +15,8 @@ jobs:
 #         node: [talker, listener]
 #       max-parallel: 2
     name: ros2setup_talker
+    env:
+      ROS_DOMAIN_ID: 100
     steps:
     - name: Setup ROS2
       uses: ros-tooling/setup-ros@0.0.15
@@ -23,16 +25,17 @@ jobs:
     - name: talker
       run: |
         ifconfig
-        export ROS_DOMAIN_ID=100
         source /opt/ros/eloquent/setup.bash
         export
         ros2 run demo_nodes_cpp talker
 #        ros2 run demo_nodes_cpp ${{matrix.node}}
-      timeout-minutes: 2
+      timeout-minutes: 1
   ros2setup_listener:
     needs: [start]
     runs-on: [ubuntu-latest]
     name: ros2setup_listener
+    env:
+      ROS_DOMAIN_ID: 100
     steps:
       - name: Setup ROS2
         uses: ros-tooling/setup-ros@0.0.15
@@ -41,11 +44,10 @@ jobs:
       - name: listener
         run: |
           ifconfig
-          export ROS_DOMAIN_ID=100
           source /opt/ros/eloquent/setup.bash
           export
           ros2 run demo_nodes_cpp listener
-        timeout-minutes: 2
+        timeout-minutes: 1
 #     - name: Checkout
 #       uses: actions/checkout@v2
 #     - name: test test
