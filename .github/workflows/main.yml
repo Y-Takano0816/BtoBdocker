@@ -25,7 +25,7 @@ jobs:
         ifconfig
         source /opt/ros/eloquent/setup.bash
         export ROS_DOMAIN_ID=111
-        expoer ROS_DOMAIN_ID
+        export ROS_DOMAIN_ID
         ros2 run demo_nodes_cpp talker
 #        ros2 run demo_nodes_cpp ${{matrix.node}}
       timeout-minutes: 1
@@ -43,7 +43,7 @@ jobs:
           ifconfig
           source /opt/ros/eloquent/setup.bash
           export ROS_DOMAIN_ID=111
-          expoer ROS_DOMAIN_ID
+          export ROS_DOMAIN_ID
           ros2 run demo_nodes_cpp listener
         timeout-minutes: 1
 #     - name: Checkout
