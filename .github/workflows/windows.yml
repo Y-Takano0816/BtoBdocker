@@ -19,7 +19,7 @@ jobs:
           required-ros-distributions: eloquent
     - name: talker&listener
       run: |
-        dir /dev/eloquent/
+        dir \dev\eloquent\
         call "C:\dev\eloquent\local_setup.bat"
         set
         ros2 run demo_nodes_cpp listener &
