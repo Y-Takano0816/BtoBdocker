@@ -3,7 +3,7 @@ name: 'main'
 on: [push]
 
 jobs:
-  ros2setup_talker&listener:                                        #jobid
+  ros2setup_talker_listener:                                        #jobid
     runs-on: [ubuntu-latest]                          
 #     strategy:
 #       matrix:
