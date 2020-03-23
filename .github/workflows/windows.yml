@@ -22,8 +22,7 @@ jobs:
         dir "C:\dev\eloquent\ros2-windows"
         call "C:\dev\eloquent\ros2-windows\local_setup.bat"
         set
-        ros2 run demo_nodes_cpp listener &
-        ros2 run demo_nodes_cpp talker
+        ros2 run demo_nodes_cpp listener & ros2 run demo_nodes_cpp talker
       shell: cmd
 #       continue-on-error: true  
       timeout-minutes: 1
