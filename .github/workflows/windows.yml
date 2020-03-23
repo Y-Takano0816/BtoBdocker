@@ -2,18 +2,42 @@
 name: 'main'
 
 on: [push]
-
 jobs:
-  hello_world_job:
-    runs-on: windows-latest
-    name: A job to say hello1
+  ros2setup_talker_listener:                                        #jobid                          
+#     strategy:
+#       fail-fast: false
+#       matrix:
+#         os: [ubuntu-latest, windows-latest, macos-latest]
+#       max-parallel: 3
+#     runs-on: ${{ matrix.os }
+    runs-on: [windows-latest]
+    name: ros2setup_talker&listener
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: test
-      run: echo test
-    - name: whoami
-      run: whoami
+    - name: Setup ROS2
+      uses: ros-tooling/setup-ros@0.0.15
+      with: 
+          required-ros-distributions: eloquent
+    - name: talker&listener
+      run: |
+        ifconfig
+        source /opt/ros/eloquent/setup.bash
+        ros2 run demo_nodes_cpp listener &
+        ros2 run demo_nodes_cpp talker
+#       shell: sh  
+      continue-on-error: true  
+      timeout-minutes: 1
+
+# jobs:
+#   hello_world_job:
+#     runs-on: windows-latest
+#     name: A job to say hello1
+#     steps:
+#     - name: Checkout
+#       uses: actions/checkout@v2
+#     - name: test
+#       run: echo test
+#     - name: whoami
+#       run: whoami
 #       with:
 #         who-to-greet: 'Mona the Octocat'
 #     # Use the output from the `hello` step
