@@ -22,7 +22,7 @@ jobs:
 #       max-parallel: 3
 #     runs-on: ${{ matrix.os }
     runs-on: [macos-latest]
-    name: ros2setup_talker&listener
+    name: MacOS_talker_listener
     steps:
     - name: Setup ROS2
       uses: ros-tooling/setup-ros@0.0.15
