@@ -14,7 +14,7 @@ on: [push]
 #     - name: who
 #       run: who
 jobs:
-  ros2setup_talker_listener:                                        #jobid                          
+  MacOS_talker_listener:                                        #jobid                          
 #     strategy:
 #       fail-fast: false
 #       matrix:
@@ -30,7 +30,6 @@ jobs:
           required-ros-distributions: eloquent
     - name: talker&listener
       run: |
-        ifconfig
         source /opt/ros/eloquent/setup.bash
         ros2 run demo_nodes_cpp listener &
         ros2 run demo_nodes_cpp talker
