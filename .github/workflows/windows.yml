@@ -3,7 +3,7 @@ name: 'main'
 
 on: [push]
 jobs:
-  ros2setup_talker_listener:                                        #jobid                          
+  windows_talker_listener:                                        #jobid                          
 #     strategy:
 #       fail-fast: false
 #       matrix:
@@ -19,12 +19,11 @@ jobs:
           required-ros-distributions: eloquent
     - name: talker&listener
       run: |
-        ifconfig
         source /opt/ros/eloquent/setup.bash
         ros2 run demo_nodes_cpp listener &
         ros2 run demo_nodes_cpp talker
 #       shell: sh  
-      continue-on-error: true  
+#       continue-on-error: true  
       timeout-minutes: 1
 
 # jobs:
