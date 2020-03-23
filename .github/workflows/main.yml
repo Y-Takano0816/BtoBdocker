@@ -9,7 +9,7 @@ jobs:
       - run: echo start
   ros2setup_talker:                                        #jobid
     needs: [start]
-    runs-on: ubuntu-latest                          
+    runs-on: [ubuntu-latest]                          
 #     strategy:
 #       matrix:
 #         node: [talker, listener]
@@ -24,8 +24,8 @@ jobs:
       run: |
         ifconfig
         source /opt/ros/eloquent/setup.bash
-        export ROS_DOMAIN_ID=111
-        export ROS_DOMAIN_ID
+        export ROS_DOMAIN_ID=100
+        export
         ros2 run demo_nodes_cpp talker
 #        ros2 run demo_nodes_cpp ${{matrix.node}}
       timeout-minutes: 1
@@ -42,8 +42,8 @@ jobs:
         run: |
           ifconfig
           source /opt/ros/eloquent/setup.bash
-          export ROS_DOMAIN_ID=111
-          export ROS_DOMAIN_ID
+          export ROS_DOMAIN_ID=100
+          export
           ros2 run demo_nodes_cpp listener
         timeout-minutes: 1
 #     - name: Checkout
