@@ -23,8 +23,8 @@ jobs:
     - name: talker
       run: |
         ifconfig
-        source /opt/ros/eloquent/setup.bash
         export ROS_DOMAIN_ID=100
+        source /opt/ros/eloquent/setup.bash
         export
         ros2 run demo_nodes_cpp talker
 #        ros2 run demo_nodes_cpp ${{matrix.node}}
@@ -41,8 +41,8 @@ jobs:
       - name: listener
         run: |
           ifconfig
-          source /opt/ros/eloquent/setup.bash
           export ROS_DOMAIN_ID=100
+          source /opt/ros/eloquent/setup.bash
           export
           ros2 run demo_nodes_cpp listener
         timeout-minutes: 2
