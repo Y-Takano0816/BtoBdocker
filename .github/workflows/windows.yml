@@ -12,6 +12,8 @@ jobs:
 #     runs-on: ${{ matrix.os }
     runs-on: [windows-latest]
     name: windows_talker_listener
+    env:
+      RMW_IMPLEMENTATION: rmw_fastrtps_cpp
     steps:
     - name: Setup ROS2
       uses: ros-tooling/setup-ros@0.0.15
@@ -21,7 +23,6 @@ jobs:
       run: |
         dir "C:\dev\eloquent\ros2-windows"
         call "C:\dev\eloquent\ros2-windows\local_setup.bat"
-        set RMW_IMPLEMENTATION=rmw_fastrtps_cpp
         set
         ros2 doctor --report
         ros2 run demo_nodes_cpp listener & ros2 run demo_nodes_cpp talker
