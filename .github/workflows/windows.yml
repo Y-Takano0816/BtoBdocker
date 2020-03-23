@@ -19,8 +19,8 @@ jobs:
           required-ros-distributions: eloquent
     - name: talker&listener
       run: |
-        TREE /F
-        dir "C:\dev\eloquent\"
+        TREE /F "C:\dev\eloquent\"
+        dir "C:\dev\eloquent\ros2-windows"
         call "C:\dev\eloquent\local_setup.bat"
         set
         ros2 run demo_nodes_cpp listener &
