@@ -23,7 +23,7 @@ jobs:
         call "C:\dev\ros2_eloquent\local_setup.bat"
         ros2 run demo_nodes_cpp listener &
         ros2 run demo_nodes_cpp talker
-#       shell: sh  
+      shell: cmd
 #       continue-on-error: true  
       timeout-minutes: 1
 
