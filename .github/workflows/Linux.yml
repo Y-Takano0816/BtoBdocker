@@ -3,7 +3,7 @@ name: 'main'
 on: [push]
 
 jobs:
-  ros2setup_talker_listener:                                        #jobid                          
+  linux_talker_listener:                                        #jobid                          
 #     strategy:
 #       fail-fast: false
 #       matrix:
@@ -17,7 +17,7 @@ jobs:
       uses: ros-tooling/setup-ros@0.0.15
       with: 
           required-ros-distributions: eloquent
-    - name: talker&listener
+    - name: linux_talker_listener
       run: |
         ifconfig
         source /opt/ros/eloquent/setup.bash
