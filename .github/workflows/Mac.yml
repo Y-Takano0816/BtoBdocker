@@ -24,12 +24,16 @@ jobs:
     runs-on: [macos-latest]
     name: MacOS_talker_listener
     steps:
-#     - name: Setup ROS2
-#       uses: ros-tooling/setup-ros@0.0.15
-#       with: 
-#           required-ros-distributions: eloquent
-    - name: talker&listener
-      run: |
+     - name: Setup ROS2
+       uses: ros-tooling/setup-ros@0.0.15
+       with: 
+           required-ros-distributions: eloquent
+     - name: talker&listener
+       run: |
+        echo pwd 1
+        pwd
+        cd /Users/runner/runners/2.165.2/work/CI-Test/CI-Test
+        echo pwd 2
         pwd
         echo cmd::cd /
         cd /
