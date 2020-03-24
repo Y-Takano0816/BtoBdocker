@@ -31,7 +31,7 @@ jobs:
     - name: talker&listener
       run: |
         echo cdcdcdcdcdcdcdcdcdcdcdccdddcdc
-        cd ../
+        cd /../
         ls -a
         echo homeeeeeeeeeeeeeeeeeeee
         cd home
