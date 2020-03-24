@@ -36,7 +36,9 @@ jobs:
         echo 次cdする
         cd ..
         cd /opt/
-        ls
+        ls -a
+        echo pwd
+        pwd
         echo ここまで
         source ../opt/ros/eloquent/setup.bash
         ros2 run demo_nodes_cpp listener &
