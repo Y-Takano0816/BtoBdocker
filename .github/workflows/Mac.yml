@@ -30,7 +30,12 @@ jobs:
           required-ros-distributions: eloquent
     - name: talker&listener
       run: |
-        ls -a　/../../
+        ls -a　../
+        echo ここまで
+        ls -a /../
+        echo ここまで
+        ls -a
+        echo ここまで
         source /opt/ros/eloquent/setup.bash
         ros2 run demo_nodes_cpp listener &
         ros2 run demo_nodes_cpp talker
