@@ -23,7 +23,7 @@ jobs:
       run: |
         dir "C:\dev\eloquent\ros2-windows"
         dir "C:\"
-        C:\>TREE /F
+        TREE /F C:\
         call "C:\dev\eloquent\ros2-windows\local_setup.bat"
         call "C:\opensplice69\HDE\x86_64.win64\release.bat"
         set
