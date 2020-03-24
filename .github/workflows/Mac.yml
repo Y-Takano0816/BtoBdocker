@@ -35,8 +35,12 @@ jobs:
         ls -a /../
         echo 次cdする
         cd ..
-        cd /opt/
         ls -a
+        find dev | grep eloquent 
+        find Users | grep eloquent 
+        find bin | grep eloquent 
+        find home | grep eloquent 
+        find var | grep eloquent 
         echo pwd
         pwd
         echo ここまで
