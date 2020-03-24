@@ -37,7 +37,7 @@ jobs:
          tar xf ../ros2-eloquent-20200124-macos-amd64.tar.bz2
      - name: talker&listener
        run: |
-         . ~/ros2_eloquent/ros2-osx/setup.bash
+         . ros2_eloquent/ros2-osx/setup.bash
          ros2 run demo_nodes_cpp listener &
          ros2 run demo_nodes_cpp talker
 
