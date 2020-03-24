@@ -12,8 +12,8 @@ jobs:
 #     runs-on: ${{ matrix.os }
     runs-on: [windows-latest]
     name: windows_talker_listener
-    env:
-      RMW_IMPLEMENTATION: rmw_fastrtps_cpp
+#     env:
+#       RMW_IMPLEMENTATION: rmw_fastrtps_cpp
     steps:
     - name: Setup ROS2
       uses: ros-tooling/setup-ros@0.0.15
@@ -22,8 +22,8 @@ jobs:
     - name: talker&listener
       run: |
         dir "C:\dev\eloquent\ros2-windows"
-        dir
-        TREE /F
+        dir "C:\"
+        C:\>TREE /F
         call "C:\dev\eloquent\ros2-windows\local_setup.bat"
         call "C:\opensplice69\HDE\x86_64.win64\release.bat"
         set
