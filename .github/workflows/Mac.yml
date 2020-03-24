@@ -30,13 +30,20 @@ jobs:
            required-ros-distributions: eloquent
      - name: talker&listener
        run: |
-        echo pwd 1
+        echo step 1
         pwd
+        echo ls -a
+        ls -a
+        echo 
+        echo step 2
         cd /Users/runner/runners/2.165.2/work/CI-Test/CI-Test
         echo pwd 2
         pwd
+        echo 
+        echo step 3
         echo cmd::cd /
         cd /
+        echo ls -a
         ls -a
         echo cmd::ls /home
         ls /home        
