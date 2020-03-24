@@ -32,9 +32,9 @@ jobs:
            required-ros-distributions: eloquent
      - name: install ROS2 for Mac
        run: 
-         mkdir -p ~/ros2_eloquent
-         cd ~/ros2_eloquent
-         tar xf ~/ros2-eloquent-20200124-macos-amd64.tar.bz2
+         mkdir ros2_eloquent
+         cd ros2_eloquent
+         tar xf ros2-eloquent-20200124-macos-amd64.tar.bz2
      - name: talker&listener
        run: |
          . ~/ros2_eloquent/ros2-osx/setup.bash
