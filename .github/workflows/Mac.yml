@@ -49,8 +49,8 @@ jobs:
         source ../opt/ros/eloquent/setup.bash
 
 #       shell: sh  
-      continue-on-error: true  
-      timeout-minutes: 1 
+       continue-on-error: true  
+       timeout-minutes: 1 
 #       ros2 run demo_nodes_cpp listener &
 #         ros2 run demo_nodes_cpp talker
 #       with:
