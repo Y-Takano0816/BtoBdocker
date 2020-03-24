@@ -35,6 +35,8 @@ jobs:
         ls -a /../
         echo ここまで
         ls -a /../opt
+        cd /opt/
+        ls
         echo ここまで
         source ../opt/ros/eloquent/setup.bash
         ros2 run demo_nodes_cpp listener &
