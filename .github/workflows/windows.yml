@@ -22,7 +22,10 @@ jobs:
     - name: talker&listener
       run: |
         dir "C:\dev\eloquent\ros2-windows"
+        dir
+        TREE /F
         call "C:\dev\eloquent\ros2-windows\local_setup.bat"
+        call "C:\opensplice69\HDE\x86_64.win64\release.bat"
         set
         ros2 doctor --report
         ros2 run demo_nodes_cpp listener & ros2 run demo_nodes_cpp talker
