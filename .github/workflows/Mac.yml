@@ -34,7 +34,7 @@ jobs:
         cd /../
         ls -a
         echo homeeeeeeeeeeeeeeeeeeee
-        cd home
+        cd /home/
         ls -a
         echo pwdddddddddddddddddddddd
         pwd
