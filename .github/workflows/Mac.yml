@@ -35,7 +35,7 @@ jobs:
         ls -a
         echo homeeeeeeeeeeeeeeeeeeee
         cd /home/
-        ls -a
+        sudo ls -a
         echo pwdddddddddddddddddddddd
         pwd
         echo aaaaaaaaaaaaaaaaaaaaaaaaa
