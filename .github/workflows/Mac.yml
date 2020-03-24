@@ -35,6 +35,11 @@ jobs:
          mkdir ros2_eloquent
          cd ros2_eloquent
          tar xf ../ros2-eloquent-20200124-macos-amd64.tar.bz2
+     - name: tiny_gradedown
+       run: |
+         brew unlink tinyxml2
+         brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/da9a96f093a57eb8ac7c9470c1ec04fd1823a37a/Formula/tinyxml2.rb
+         brew switch tinyxml2 6.2.0
      - name: talker&listener
        run: |
          . ros2_eloquent/ros2-osx/setup.bash
