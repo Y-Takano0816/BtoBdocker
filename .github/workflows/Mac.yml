@@ -31,10 +31,12 @@ jobs:
     - name: talker&listener
       run: |
         pwd
-        echo cdcdcdcdcdcdcdcdcdcdcdccdddcdc
-        cd /../
+        echo cmd::cd /
+        cd /
         ls -a
-        echo homeeeeeeeeeeeeeeeeeeee
+        echo cmd::ls /home
+        ls /home        
+        echo cmd:: cd home
         cd /home/
         sudo ls -a
         echo pwdddddddddddddddddddddd
