@@ -24,12 +24,13 @@ jobs:
     runs-on: [macos-latest]
     name: MacOS_talker_listener
     steps:
-    - name: Setup ROS2
-      uses: ros-tooling/setup-ros@0.0.15
-      with: 
-          required-ros-distributions: eloquent
+#     - name: Setup ROS2
+#       uses: ros-tooling/setup-ros@0.0.15
+#       with: 
+#           required-ros-distributions: eloquent
     - name: talker&listener
       run: |
+        pwd
         echo cdcdcdcdcdcdcdcdcdcdcdccdddcdc
         cd /../
         ls -a
@@ -40,11 +41,12 @@ jobs:
         pwd
         echo aaaaaaaaaaaaaaaaaaaaaaaaa
         source ../opt/ros/eloquent/setup.bash
-        ros2 run demo_nodes_cpp listener &
-        ros2 run demo_nodes_cpp talker
+
 #       shell: sh  
       continue-on-error: true  
-      timeout-minutes: 1
+      timeout-minutes: 1 
+#       ros2 run demo_nodes_cpp listener &
+#         ros2 run demo_nodes_cpp talker
 #       with:
 #         who-to-greet: 'Mona the Octocat'
 #     # Use the output from the `hello` step
