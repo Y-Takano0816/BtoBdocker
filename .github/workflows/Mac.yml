@@ -30,7 +30,7 @@ jobs:
           required-ros-distributions: eloquent
     - name: talker&listener
       run: |
-        ls -a　../
+        ls -a ../
         echo ここまで
         ls -a /../
         echo ここまで
