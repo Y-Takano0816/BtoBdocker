@@ -1,7 +1,7 @@
 
 name: 'main'
 
-# on: [push]
+on: [push]
 jobs:
   windows_talker_listener:                                        #jobid                          
 #     strategy:
