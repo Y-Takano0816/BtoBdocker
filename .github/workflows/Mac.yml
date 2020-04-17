@@ -24,40 +24,56 @@ jobs:
     runs-on: [macos-latest]
     name: MacOS_talker_listener
     steps:
+     - name: checkout
+       uses: actions/checkout@v1
      - name: Setup ROS2
        uses: ros-tooling/setup-ros@0.0.15
        with: 
            required-ros-distributions: eloquent
+     - name: install ROS2 for Mac
+       run: |
+         mkdir ros2_eloquent
+         cd ros2_eloquent
+         tar xf ../ros2-eloquent-20200124-macos-amd64.tar.bz2
+     - name: tiny_gradedown
+       run: |
+         git checkout 7987b19c9388517d12eda60ac3258fd5348ef86e /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core/Formula/poco.rb
+         brew unlink poco
+         HOMEBREW_NO_AUTO_UPDATE=1 brew install poco.rb
      - name: talker&listener
        run: |
-        echo step 1
-        pwd
-        echo ls -a
-        ls -a
-        echo 
-        echo step 2
-        cd /Users/runner/runners/2.165.2/work/CI-Test/CI-Test
-        echo pwd 2
-        pwd
-        echo 
-        echo step 3
-        echo cmd::cd /
-        cd /
-        echo ls -a
-        ls -a
-        echo cmd::ls /home
-        ls /home        
-        echo cmd:: cd home
-        cd /home/
-        sudo ls -a
-        echo pwdddddddddddddddddddddd
-        pwd
-        echo aaaaaaaaaaaaaaaaaaaaaaaaa
-        source ../opt/ros/eloquent/setup.bash
+         . ros2_eloquent/ros2-osx/setup.bash
+         ros2 doctor --report
+         ros2 run demo_nodes_cpp listener &
+         ros2 run demo_nodes_cpp talker
 
+#           echo step 1
+#           pwd
+#           echo ls -a
+#           ls -a
+#           echo 
+#           echo step 2
+#           cd /Users/runner/runners/2.1
+#           echo pwd 2
+#           pwd
+#           echo 
+#           echo step 3
+#           echo cmd::cd /
+#           cd /
+#           echo ls -a
+#           ls -a
+#           echo cmd::ls /home
+#           ls /home        
+#           echo cmd:: cd home
+#           cd /home/
+#           sudo ls -a
+#           echo pwdddddddddddddddddddddd
+#           pwd
+#           echo aaaaaaaaaaaaaaaaaaaaaaaaa
+#           source ../opt/ros/eloquent/setup.bash
 #       shell: sh  
-       continue-on-error: true  
-       timeout-minutes: 1 
+#        continue-on-error: true  
+#        timeout-minutes: 1 
 #       ros2 run demo_nodes_cpp listener &
 #         ros2 run demo_nodes_cpp talker
 #       with:
