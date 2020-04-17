@@ -1,0 +1,403 @@
+root:
+    pure_pursuit:
+        input: "'pure_pursuit_topics.bag', '/twist_raw:=/twist_raw_test', '/ctrl_cmd:=/ctrl_cmd_test', '/next_waypoint_mark:=/next_waypoint_mark_test', '/next_target_mark:=/next_target_mark_test', '/search_circle_mark:=/search_circle_mark_test', '/line_point_mark:=/line_point_mark_test', '/trajectory_circle_mark:=/trajectory_circle_mark_test'"
+        output: ['twist_raw','ctrl_cmd','next_waypoint_mark','next_target_mark','search_circle_mark','line_point_mark','trajectory_circle_mark']
+    twist_filter:
+        input: "'twist_filter_topics.bag', '/twist_cmd:=/twist_cmd_test'"
+        output: ['twist_cmd']
+    twist_gate:
+        input: "'twist_gate_topics.bag', '/emergency_stop:=/emergency_stop_test', '/ctrl_mode:=/ctrl_mode_test', '/vehicle_cmd:=/vehicle_cmd_test', '/state_cmd:=/state_cmd_test'"
+        output: ['emergency_stop','ctrl_mode','vehicle_cmd','state_cmd']
+    wf_simulator:
+        input: "'wf_simulator_topics.bag', '/sim_pose:=/sim_pose_test', '/sim_velocity:=/sim_velocity_test'"
+        output: ['sim_pose','sim_velocity']
+    vector_map_client:
+        input: "'vector_map_client_topics.bag', '/vector_map_client:=/vector_map_client_test'"
+        output: ['vector_map_client']
+    vector_map_server:
+        input: "'vector_map_server_topics.bag', '/vector_map_server:=/vector_map_server_test'"
+        output: ['vector_map_server']
+    points_map_loader:
+        input: "'points_map_loader_topics.bag', '/points_map:=/points_map_test', '/pmap_stat:=/pmap_stat_test'"
+        output: ['points_map','pmap_stat']
+    vector_map_loader:
+        input: "'vector_map_loader_topics.bag', '/vector_map:=/vector_map_test', '/vmap_stat:=/vmap_stat_test', '/vector_map_info/*:=/vector_map_info/*_test'"
+        output: ['vector_map','vmap_stat','vector_map_info/*']
+    grid_map_filter:
+        input: "'grid_map_filter_topics.bag', '/filtered_grid_map:=/filtered_grid_map_test'"
+        output: ['filtered_grid_map']
+    laserscan2costmap:
+        input: "'laserscan2costmap_topics.bag', '/ring_ogm:=/ring_ogm_test'"
+        output: ['ring_ogm']
+    points2costmap:
+        input: "'points2costmap_topics.bag', '/realtime_cost_map:=/realtime_cost_map_test'"
+        output: ['realtime_cost_map']
+    potential_field:
+        input: "'potential_field_topics.bag', '/potential_field:=/potential_field_test'"
+        output: ['potential_field']
+    wayarea2grid:
+        input: "'wayarea2grid_topics.bag', '/grid_map_wayarea:=/grid_map_wayarea_test', '/occupancy_wayarea:=/occupancy_wayarea_test'"
+        output: ['grid_map_wayarea','occupancy_wayarea']
+    points2image:
+        input: "'points2image_topics.bag', '/points_image:=/points_image_test'"
+        output: ['points_image']
+    points2vscan:
+        input: "'points2vscan_topics.bag', '/vscan_points:=/vscan_points_test', '/scan:=/scan_test'"
+        output: ['vscan_points','scan']
+    vscan2image:
+        input: "'vscan2image_topics.bag', '/vscan_image:=/vscan_image_test'"
+        output: ['vscan_image']
+    vscan2linelist:
+        input: "'vscan2linelist_topics.bag', '/vscan_linelist:=/vscan_linelist_test'"
+        output: ['vscan_linelist']
+    ff_waypoint_follower:
+        input: "'ff_waypoint_follower_topics.bag', '/twist_raw:=/twist_raw_test', '/wf_stat:=/wf_stat_test', '/curr_simu_pose:=/curr_simu_pose_test', '/follow_pose:=/follow_pose_test', '/sim_pose:=/sim_pose_test', '/sim_velocity:=/sim_velocity_test', '/twist_cmd:=/twist_cmd_test', '/ControlBoxOdom:=/ControlBoxOdom_test', '/linear_velocity_viz:=/linear_velocity_viz_test'"
+        output: ['twist_raw','wf_stat','curr_simu_pose','follow_pose','sim_pose','sim_velocity','twist_cmd','ControlBoxOdom','linear_velocity_viz']
+    astar_navi:
+        input: "'astar_navi_topics.bag', '/astar_path:=/astar_path_test', '/lane_waypoints_array:=/lane_waypoints_array_test', '/debug_pose_array:=/debug_pose_array_test'"
+        output: ['astar_path','lane_waypoints_array','debug_pose_array']
+    op_trajectory_generator:
+        input: "'op_trajectory_generator_topics.bag', '/final_waypoints:=/final_waypoints_test', '/base_waypoints:=/base_waypoints_test', '/local_trajectories:=/local_trajectories_test'"
+        output: ['final_waypoints','base_waypoints','local_trajectories']
+    lane_navi:
+        input: "'lane_navi_topics.bag', '/lane_waypoints_array:=/lane_waypoints_array_test'"
+        output: ['lane_waypoints_array']
+    lane_rule:
+        input: "'lane_rule_topics.bag', '/traffic_waypoints_array:=/traffic_waypoints_array_test', '/red_waypoints_array:=/red_waypoints_array_test', '/green_waypoints_array:=/green_waypoints_array_test'"
+        output: ['traffic_waypoints_array','red_waypoints_array','green_waypoints_array']
+    lane_select:
+        input: "'lane_select_topics.bag', '/base_waypoints:=/base_waypoints_test', '/closest_waypoint:=/closest_waypoint_test'"
+        output: ['base_waypoints','closest_waypoint']
+    lane_stop:
+        input: "'lane_stop_topics.bag', '/traffic_waypoints_array:=/traffic_waypoints_array_test'"
+        output: ['traffic_waypoints_array']
+    op_data_logger:
+        input: "'op_data_logger_topics.bag'"
+        output: []
+    op_pose2tf:
+        input: "'op_pose2tf_topics.bag', '/reset_time:=/reset_time_test', 'tf:=tf_test'"
+        output: ['reset_time','tf']
+    op_bag_player:
+        input: "'op_bag_player_topics.bag', '/ndt_pose:=/ndt_pose_test', '/points_raw:=/points_raw_test', '/image_raw:=/image_raw_test'"
+        output: ['ndt_pose','points_raw','image_raw']
+    obstacle_avoid:
+        input: "'obstacle_avoid_topics.bag', '/astar_path:=/astar_path_test', '/safety_waypoints:=/safety_waypoints_test', '/astar_debug_poses:=/astar_debug_poses_test', '/astar_footprint:=/astar_footprint_test'"
+        output: ['astar_path','safety_waypoints','astar_debug_poses','astar_footprint']
+    velocity_set:
+        input: "'velocity_set_topics.bag', '/detection_range:=/detection_range_test', '/obstacle:=/obstacle_test', '/obstacle_waypoint:=/obstacle_waypoint_test', '/astar/final_waypoints:=/astar/final_waypoints_test', '/final_waypoints:=/final_waypoints_test'"
+        output: ['detection_range','obstacle','obstacle_waypoint','astar/final_waypoints','final_waypoints']
+    decision_maker_node:
+        input: "'decision_maker_node_topics.bag', '/state/stopline_wpidx:=/state/stopline_wpidx_test', '/state:=/state_test', '/lane_waypoints_array:=/lane_waypoints_array_test', '/decisionmaker/states:=/decisionmaker/states_test', '/light_color_managed:=/light_color_managed_test', '/lamp_cmd:=/lamp_cmd_test', '/decision_maker/state_overlay:=/decision_maker/state_overlay_test', '/state/cross_road_marker:=/state/cross_road_marker_test', '/state/cross_inside_marker:=/state/cross_inside_marker_test', '/state/crossroad_bbox:=/state/crossroad_bbox_test', '/state/detection_area:=/state/detection_area_test', '/state/stopline_target:=/state/stopline_target_test', '/target_velocity_array:=/target_velocity_array_test', '/state/val_diff_distance:=/state/val_diff_distance_test', '/state/exectime:=/state/exectime_test'"
+        output: ['state/stopline_wpidx','state','lane_waypoints_array','decisionmaker/states','light_color_managed','lamp_cmd','decision_maker/state_overlay','state/cross_road_marker','state/cross_inside_marker','state/crossroad_bbox','state/detection_area','state/stopline_target','target_velocity_array','state/val_diff_distance','state/exectime']
+    waypoint_clicker:
+        input: "'waypoint_clicker_topics.bag', '/waypoint_guide:=/waypoint_guide_test'"
+        output: ['waypoint_guide']
+    waypoint_loader:
+        input: "'waypoint_loader_topics.bag', '/based/lane_waypoint_raw:=/based/lane_waypoint_raw_test'"
+        output: ['based/lane_waypoint_raw']
+    waypoint_replanner:
+        input: "'waypoint_replanner_topics.bag', '/based/lane_waypoint_array:=/based/lane_waypoint_array_test', '/lane_waypoints_array:=/lane_waypoints_array_test'"
+        output: ['based/lane_waypoint_array','lane_waypoints_array']
+    waypoints_marker_publisher:
+        input: "'waypoints_marker_publisher_topics.bag', '/local_waypoints_mark:=/local_waypoints_mark_test', '/global_waypoints_mark:=/global_waypoints_mark_test'"
+        output: ['local_waypoints_mark','global_waypoints_mark']
+    waypoint_saver:
+        input: "'waypoint_saver_topics.bag', '/waypoint_saver_marker:=/waypoint_saver_marker_test'"
+        output: ['waypoint_saver_marker']
+    waypoint_velocity_visualizer:
+        input: "'waypoint_velocity_visualizer_topics.bag', '/waypoints_velocity:=/waypoints_velocity_test'"
+        output: ['waypoints_velocity']
+    way_planner:
+        input: "'way_planner_topics.bag', '/lane_waypoints_array:=/lane_waypoints_array_test', '/global_waypoints_rviz:=/global_waypoints_rviz_test', '/Global_StartPoint_rviz:=/Global_StartPoint_rviz_test', '/Global_GoalPoints_rviz:=/Global_GoalPoints_rviz_test', '/Goal_Nodes_Points_rviz:=/Goal_Nodes_Points_rviz_test', '/vector_map_center_lines_rviz:=/vector_map_center_lines_rviz_test', '/Traffic_Lights_rviz:=/Traffic_Lights_rviz_test'"
+        output: ['lane_waypoints_array','global_waypoints_rviz','Global_StartPoint_rviz','Global_GoalPoints_rviz','Goal_Nodes_Points_rviz','vector_map_center_lines_rviz','Traffic_Lights_rviz']
+    lattice_trajectry_gen:
+        input: "'lattice_trajectry_gen_topics.bag', '/next_waypoint_mark:=/next_waypoint_mark_test', '/wf_stat:=/wf_stat_test', '/spline:=/spline_test', '/state:=/state_test', '/cubic_splines_viz:=/cubic_splines_viz_test'"
+        output: ['next_waypoint_mark','wf_stat','spline','state','cubic_splines_viz']
+    command_converter:
+        input: "'command_converter_topics.bag', '/twist_raw:=/twist_raw_test'"
+        output: ['twist_raw']
+    lattice_velocity_set:
+        input: "'lattice_velocity_set_topics.bag', '/detection_range:=/detection_range_test', '/sound_player:=/sound_player_test', '/temporal_waypoints:=/temporal_waypoints_test', '/closest_waypoint:=/closest_waypoint_test', '/obstacle:=/obstacle_test'"
+        output: ['detection_range','sound_player','temporal_waypoints','closest_waypoint','obstacle']
+    path_select:
+        input: "'path_select_topics.bag', '/final_waypoints:=/final_waypoints_test'"
+        output: ['final_waypoints']
+    dp_planner:
+        input: "'dp_planner_topics.bag', '/local_trajectories_dynamic:=/local_trajectories_dynamic_test', '/enableLattice:=/enableLattice_test', '/final_waypoints:=/final_waypoints_test', '/base_waypoints:=/base_waypoints_test', '/closest_waypoint:=/closest_waypoint_test', '/current_behavior:=/current_behavior_test', '/global_plan_nodes:=/global_plan_nodes_test', '/GlobalStartpose:=/GlobalStartpose_test', '/GlobalGoalPose:=/GlobalGoalPose_test', '/global_plan_start:=/global_plan_start_test', '/global_plan_goal:=/global_plan_goal_test', '/detected_polygons:=/detected_polygons_test', '/dp_planner_tracked_boxes:=/dp_planner_tracked_boxes_test', '/local_trajectories:=/local_trajectories_test', '/testing_line:=/testing_line_test', '/behavior_state:=/behavior_state_test', '/safety_border:=/safety_border_test', '/simu_points_cluster:=/simu_points_cluster_test', '/sim_box_pose_ego:=/sim_box_pose_ego_test'"
+        output: ['local_trajectories_dynamic','enableLattice','final_waypoints','base_waypoints','closest_waypoint','current_behavior','global_plan_nodes','GlobalStartpose','GlobalGoalPose','global_plan_start','global_plan_goal','detected_polygons','dp_planner_tracked_boxes','local_trajectories','testing_line','behavior_state','safety_border','simu_points_cluster','sim_box_pose_ego']
+    can_uploader:
+        input: "'can_uploader_topics.bag'"
+        output: []
+    obj_downloader:
+        input: "'obj_downloader_topics.bag', '/mo_pictograms:=/mo_pictograms_test'"
+        output: ['mo_pictograms']
+    obj_uploader:
+        input: "'obj_uploader_topics.bag'"
+        output: []
+    naive_motion_predict:
+        input: "'naive_motion_predict_topics.bag', '/prediction/objects:=/prediction/objects_test'"
+        output: ['prediction/objects']
+    lidar_fake_percetion:
+        input: "'lidar_fake_percetion_topics.bag', '/fake_objects:=/fake_objects_test', '/fake_points:=/fake_points_test'"
+        output: ['fake_objects','fake_points']
+    local2global:
+        input: "'local2global_topics.bag', '/current_pose:=/current_pose_test', '/ndt_map:=/ndt_map_test'"
+        output: ['current_pose','ndt_map']
+    ndt_mapping:
+        input: "'ndt_mapping_topics.bag', '/ndt_map:=/ndt_map_test', '/current_pose:=/current_pose_test'"
+        output: ['ndt_map','current_pose']
+    queue_counter:
+        input: "'queue_counter_topics.bag'"
+        output: []
+    ndt_matching:
+        input: "'ndt_matching_topics.bag', '/predict_pose:=/predict_pose_test', '/ndt_pose:=/ndt_pose_test', '/localizer_pose:=/localizer_pose_test', '/estimate_twist:=/estimate_twist_test', '/estimated_vel_mps:=/estimated_vel_mps_test', '/estimated_vel_kmph:=/estimated_vel_kmph_test', '/estimated_vel:=/estimated_vel_test', '/time_ndt_matching:=/time_ndt_matching_test', '/ndt_stat:=/ndt_stat_test', '/ndt_reliability:=/ndt_reliability_test'"
+        output: ['predict_pose','ndt_pose','localizer_pose','estimate_twist','estimated_vel_mps','estimated_vel_kmph','estimated_vel','time_ndt_matching','ndt_stat','ndt_reliability']
+    icp_matching:
+        input: "'icp_matching_topics.bag', '/predict_pose:=/predict_pose_test', '/icp_pose:=/icp_pose_test', '/localizer_pose:=/localizer_pose_test', '/estimate_twist:=/estimate_twist_test', '/estimated_vel_mps:=/estimated_vel_mps_test', '/estimated_vel_kmph:=/estimated_vel_kmph_test', '/estimated_vel:=/estimated_vel_test', '/time_icp_matching:=/time_icp_matching_test', '/icp_stat:=/icp_stat_test'"
+        output: ['predict_pose','icp_pose','localizer_pose','estimate_twist','estimated_vel_mps','estimated_vel_kmph','estimated_vel','time_icp_matching','icp_stat']
+    vision_darknet_detect:
+        input: "'vision_darknet_detect_topics.bag', '/detected_objects:=/detected_objects_test'"
+        output: ['detected_objects']
+    occupancy_processor_01:
+        input: "'occupancy_processor_01_topics.bag', '/gridmap_road_status:=/gridmap_road_status_test', '/occupancy_road_status:=/occupancy_road_status_test'"
+        output: ['gridmap_road_status','occupancy_road_status']
+    can_info_translator:
+        input: "'can_info_translator_topics.bag', '/can_velocity:=/can_velocity_test', '/linear_velocity_viz:=/linear_velocity_viz_test', '/odom_pose:=/odom_pose_test'"
+        output: ['can_velocity','linear_velocity_viz','odom_pose']
+    dpm_ocv:
+        input: "'dpm_ocv_topics.bag', '/obj_X/image_obj:=/obj_X/image_obj_test'"
+        output: ['obj_X/image_obj']
+    dpm_ttic:
+        input: "'dpm_ttic_topics.bag', '/obj_X/image_obj:=/obj_X/image_obj_test'"
+        output: ['obj_X/image_obj']
+    kf_track:
+        input: "'kf_track_topics.bag', '/obj_X/image_obj_tracked:=/obj_X/image_obj_tracked_test'"
+        output: ['obj_X/image_obj_tracked']
+    klt_track:
+        input: "'klt_track_topics.bag', '/obj_X/image_obj_tracked:=/obj_X/image_obj_tracked_test'"
+        output: ['obj_X/image_obj_tracked']
+    obj_reproj:
+        input: "'obj_reproj_topics.bag', '/obj_X/obj_label:=/obj_X/obj_label_test', '/obj_X/obj_label_marker:=/obj_X/obj_label_marker_test'"
+        output: ['obj_X/obj_label','obj_X/obj_label_marker']
+    range_fusion:
+        input: "'range_fusion_topics.bag', '/obj_X/image_obj_ranged:=/obj_X/image_obj_ranged_test'"
+        output: ['obj_X/image_obj_ranged']
+    image_rectifier*:
+        input: "'image_rectifier*_topics.bag', '/image_rectified:=/image_rectified_test'"
+        output: ['image_rectified']
+    image_rotator*:
+        input: "'image_rotator*_topics.bag', '/image_rotated:=/image_rotated_test'"
+        output: ['image_rotated']
+    lidar_kf_contour_track:
+        input: "'lidar_kf_contour_track_topics.bag', '/detected_objects:=/detected_objects_test', '/detected_polygons:=/detected_polygons_test', '/op_planner_tracked_boxes:=/op_planner_tracked_boxes_test'"
+        output: ['detected_objects','detected_polygons','op_planner_tracked_boxes']
+    line_ocv:
+        input: "'line_ocv_topics.bag', '/lane_pos_xy:=/lane_pos_xy_test'"
+        output: ['lane_pos_xy']
+    lidar_euclidean_cluster_detect:
+        input: "'lidar_euclidean_cluster_detect_topics.bag', '/detection/lidar_objects/l_shaped:=/detection/lidar_objects/l_shaped_test'"
+        output: ['detection/lidar_objects/l_shaped']
+    pos_downloader:
+        input: "'pos_downloader_topics.bag', '/mo_pictograms:=/mo_pictograms_test'"
+        output: ['mo_pictograms']
+    pos_uploader:
+        input: "'pos_uploader_topics.bag'"
+        output: []
+    feature_projection:
+        input: "'feature_projection_topics.bag', '/roi_signal:=/roi_signal_test'"
+        output: ['roi_signal']
+    traffic_light_recognition:
+        input: "'traffic_light_recognition_topics.bag', '/camera_light_color:=/camera_light_color_test', '/sound_player:=/sound_player_test', '/tlr_result:=/tlr_result_test', '/tlr_superimpose_image:=/tlr_superimpose_image_test', '/tlr_result_array:=/tlr_result_array_test'"
+        output: ['camera_light_color','sound_player','tlr_result','tlr_superimpose_image','tlr_result_array']
+    region_tlr_mxnet:
+        input: "'region_tlr_mxnet_topics.bag', '/light_color:=/light_color_test', '/sound_player:=/sound_player_test', '/tlr_result:=/tlr_result_test', '/tlr_superimpose_image:=/tlr_superimpose_image_test'"
+        output: ['light_color','sound_player','tlr_result','tlr_superimpose_image']
+    region_tlr_ssd:
+        input: "'region_tlr_ssd_topics.bag', '/light_color:=/light_color_test', '/sound_player:=/sound_player_test', '/tlr_result:=/tlr_result_test', '/tlr_superimpose_image:=/tlr_superimpose_image_test'"
+        output: ['light_color','sound_player','tlr_result','tlr_superimpose_image']
+    roi_extractor:
+        input: "'roi_extractor_topics.bag'"
+        output: []
+    light_color_switch:
+        input: "'light_color_switch_topics.bag', '/light_color:=/light_color_test'"
+        output: ['light_color']
+    tlr_tuner:
+        input: "'tlr_tuner_topics.bag', '/tuned_result:=/tuned_result_test'"
+        output: ['tuned_result']
+    distance_filter:
+        input: "'distance_filter_topics.bag', '/filtered_points:=/filtered_points_test', '/points_downsampler_info:=/points_downsampler_info_test'"
+        output: ['filtered_points','points_downsampler_info']
+    random_filter:
+        input: "'random_filter_topics.bag', '/filtered_points:=/filtered_points_test', '/points_downsampler_info:=/points_downsampler_info_test'"
+        output: ['filtered_points','points_downsampler_info']
+    ring_filter:
+        input: "'ring_filter_topics.bag', '/filtered_points:=/filtered_points_test', '/points_downsampler_info:=/points_downsampler_info_test'"
+        output: ['filtered_points','points_downsampler_info']
+    voxel_grid_filter:
+        input: "'voxel_grid_filter_topics.bag', '/filtered_points:=/filtered_points_test', '/points_downsampler_info:=/points_downsampler_info_test'"
+        output: ['filtered_points','points_downsampler_info']
+    cloud_transformer:
+        input: "'cloud_transformer_topics.bag', '/points_transformed:=/points_transformed_test'"
+        output: ['points_transformed']
+    points_concat_filter:
+        input: "'points_concat_filter_topics.bag', '/points_concat:=/points_concat_test'"
+        output: ['points_concat']
+    ray_ground_filter:
+        input: "'ray_ground_filter_topics.bag', '/points_no_ground:=/points_no_ground_test', '/points_ground:=/points_ground_test'"
+        output: ['points_no_ground','points_ground']
+    ring_ground_filter:
+        input: "'ring_ground_filter_topics.bag', '/points_no_ground:=/points_no_ground_test', '/points_ground:=/points_ground_test'"
+        output: ['points_no_ground','points_ground']
+    space_filter:
+        input: "'space_filter_topics.bag', '/points_clipped:=/points_clipped_test'"
+        output: ['points_clipped']
+    compare_map_filter:
+        input: "'compare_map_filter_topics.bag', '/points_ground:=/points_ground_test', '/points_no_ground:=/points_no_ground_test'"
+        output: ['points_ground','points_no_ground']
+    lidar_euclidean_cluster_detect:
+        input: "'lidar_euclidean_cluster_detect_topics.bag', '/bounding_boxes:=/bounding_boxes_test', '/centroid_marker:=/centroid_marker_test', '/cloud_clusters:=/cloud_clusters_test', '/cluster_centroids:=/cluster_centroids_test', '/detection/lidar_detector/objects_hulls:=/detection/lidar_detector/objects_hulls_test', '/detection/lidar_detector/objects_markers:=/detection/lidar_detector/objects_markers_test', '/grid_map_wayarea:=/grid_map_wayarea_test', '/points_cluster:=/points_cluster_test', '/points_ground:=/points_ground_test', '/points_lanes:=/points_lanes_test'"
+        output: ['bounding_boxes','centroid_marker','cloud_clusters','cluster_centroids','detection/lidar_detector/objects_hulls','detection/lidar_detector/objects_markers','grid_map_wayarea','points_cluster','points_ground','points_lanes']
+    fix2tfpose:
+        input: "'fix2tfpose_topics.bag', '/gnss_pose:=/gnss_pose_test', '/gnss_stat:=/gnss_stat_test'"
+        output: ['gnss_pose','gnss_stat']
+    nmea2tfpose:
+        input: "'nmea2tfpose_topics.bag', '/gnss_pose:=/gnss_pose_test'"
+        output: ['gnss_pose']
+    map_extender:
+        input: "'map_extender_topics.bag', '/extended_map:=/extended_map_test'"
+        output: ['extended_map']
+    udon_receiver:
+        input: "'udon_receiver_topics.bag'"
+        output: []
+    udon_sender:
+        input: "'udon_sender_topics.bag'"
+        output: []
+    sync_obj_fusion/*/sync_*_fusion:
+        input: "'sync_obj_fusion/*/sync_*_fusion_topics.bag', '/sync_obj_fusion/*/obj_label:=/sync_obj_fusion/*/obj_label_test', '/sync_obj_fusion/*/cluster_centroids:=/sync_obj_fusion/*/cluster_centroids_test', '/sync_obj_fusion/time_diff:=/sync_obj_fusion/time_diff_test'"
+        output: ['sync_obj_fusion/*/obj_label','sync_obj_fusion/*/cluster_centroids','sync_obj_fusion/time_diff']
+    sync_tracking/*/sync_*_tracking:
+        input: "'sync_tracking/*/sync_*_tracking_topics.bag', '/sync_tracking/*/image_obj_ranged:=/sync_tracking/*/image_obj_ranged_test', '/sync_tracking/*/image_raw:=/sync_tracking/*/image_raw_test', '/sync_tracking/time_diff:=/sync_tracking/time_diff_test'"
+        output: ['sync_tracking/*/image_obj_ranged','sync_tracking/*/image_raw','sync_tracking/time_diff']
+    sync_reprojection/*/sync_*_reprojection:
+        input: "'sync_reprojection/*/sync_*_reprojection_topics.bag', '/sync_reprojection/*/image_obj_tracked:=/sync_reprojection/*/image_obj_tracked_test', '/sync_reprojection/*/current_pose:=/sync_reprojection/*/current_pose_test', '/sync_reprojection/time_diff:=/sync_reprojection/time_diff_test'"
+        output: ['sync_reprojection/*/image_obj_tracked','sync_reprojection/*/current_pose','sync_reprojection/time_diff']
+    sync_tracking/*/sync_*_ranging:
+        input: "'sync_tracking/*/sync_*_ranging_topics.bag', '/sync_ranging/*/image_obj:=/sync_ranging/*/image_obj_test', '/sync_ranging/*/points_image:=/sync_ranging/*/points_image_test', '/sync_ranging/time_diff:=/sync_ranging/time_diff_test'"
+        output: ['sync_ranging/*/image_obj','sync_ranging/*/points_image','sync_ranging/time_diff']
+    sync_drivers/sync_drivers:
+        input: "'sync_drivers/sync_drivers_topics.bag', '/image_raw:=/image_raw_test', '/points_raw:=/points_raw_test', '/time_difference:=/time_difference_test'"
+        output: ['image_raw','points_raw','time_difference']
+    synchronization/*/time_monitor:
+        input: "'synchronization/*/time_monitor_topics.bag', '/times:=/times_test'"
+        output: ['times']
+    time_visualizer:
+        input: "'time_visualizer_topics.bag'"
+        output: []
+    runtime_manager:
+        input: "'runtime_manager_topics.bag', '/from_rtmgr:=/from_rtmgr_test', '/accel_cmd:=/accel_cmd_test', '/brake_cmd:=/brake_cmd_test', '/gear_cmd:=/gear_cmd_test', '/indicator_cmd:=/indicator_cmd_test', '/lamp_cmd:=/lamp_cmd_test', '/mode_cmd:=/mode_cmd_test', '/steer_cmd:=/steer_cmd_test', '/twist_cmd:=/twist_cmd_test', '/traffic_light:=/traffic_light_test', '/config/adjust_xy:=/config/adjust_xy_test', '/config/X_dpm:=/config/X_dpm_test', '/config/X_kf:=/config/X_kf_test', '/config/X_fusion:=/config/X_fusion_test', '/config/lane_rule:=/config/lane_rule_test', '/config/lane_select:=/config/lane_select_test', '/config/ndt:=/config/ndt_test', '/config/ndt_mapping:=/config/ndt_mapping_test', '/config/ndt_mapping_output:=/config/ndt_mapping_output_test', '/config/superimpose:=/config/superimpose_test', '/config/twist_filter:=/config/twist_filter_test', '/config/velocity_set:=/config/velocity_set_test', '/config/waypoint_follower:=/config/waypoint_follower_test'"
+        output: ['from_rtmgr','accel_cmd','brake_cmd','gear_cmd','indicator_cmd','lamp_cmd','mode_cmd','steer_cmd','twist_cmd','traffic_light','config/adjust_xy','config/X_dpm','config/X_kf','config/X_fusion','config/lane_rule','config/lane_select','config/ndt','config/ndt_mapping','config/ndt_mapping_output','config/superimpose','config/twist_filter','config/velocity_set','config/waypoint_follower']
+    pc2_downsampler:
+        input: "'pc2_downsampler_topics.bag', '/downsampled_points_map:=/downsampled_points_map_test', '/downsampled_points_raw:=/downsampled_points_raw_test'"
+        output: ['downsampled_points_map','downsampled_points_raw']
+    tablet_receiver:
+        input: "'tablet_receiver_topics.bag', '/gear_cmd:=/gear_cmd_test', '/mode_cmd:=/mode_cmd_test', '/route_cmd:=/route_cmd_test', '/gnss_pose:=/gnss_pose_test', '/gnss_stat:=/gnss_stat_test'"
+        output: ['gear_cmd','mode_cmd','route_cmd','gnss_pose','gnss_stat']
+    tablet_sender:
+        input: "'tablet_sender_topics.bag'"
+        output: []
+    kitti_player:
+        input: "'kitti_player_topics.bag', '/grayscale/left/image_rect:=/grayscale/left/image_rect_test', '/grayscale/right/image_rect:=/grayscale/right/image_rect_test', '/color/left/image_rect:=/color/left/image_rect_test', '/color/right/image_rect:=/color/right/image_rect_test', '/hdl64e:=/hdl64e_test', '/oxts/gps:=/oxts/gps_test', '/oxts/gps_initial:=/oxts/gps_initial_test', '/oxts/imu:=/oxts/imu_test', '/preprocessed_disparity:=/preprocessed_disparity_test'"
+        output: ['grayscale/left/image_rect','grayscale/right/image_rect','color/left/image_rect','color/right/image_rect','hdl64e','oxts/gps','oxts/gps_initial','oxts/imu','preprocessed_disparity']
+    multi_lidar_calibrator:
+        input: "'multi_lidar_calibrator_topics.bag', '/points_calibrated:=/points_calibrated_test'"
+        output: ['points_calibrated']
+    marker_downsampler:
+        input: "'marker_downsampler_topics.bag', '/downsampled_trajectory_circle_mark:=/downsampled_trajectory_circle_mark_test', '/downsampled_next_target_mark:=/downsampled_next_target_mark_test'"
+        output: ['downsampled_trajectory_circle_mark','downsampled_next_target_mark']
+    oculus_sender:
+        input: "'oculus_sender_topics.bag'"
+        output: []
+    kitti_box_publisher:
+        input: "'kitti_box_publisher_topics.bag', '/kitti_box:=/kitti_box_test', '/obj_car/image_obj:=/obj_car/image_obj_test', '/kitti_3d_labels:=/kitti_3d_labels_test', '/points_cluster:=/points_cluster_test'"
+        output: ['kitti_box','obj_car/image_obj','kitti_3d_labels','points_cluster']
+    mqtt_receiver:
+        input: "'mqtt_receiver_topics.bag', '/remote_cmd:=/remote_cmd_test'"
+        output: ['remote_cmd']
+    mqtt_pose_receiver:
+        input: "'mqtt_pose_receiver_topics.bag', '/current_pose:=/current_pose_test'"
+        output: ['current_pose']
+    vehicle_receiver:
+        input: "'vehicle_receiver_topics.bag', '/can_info:=/can_info_test', '/mode_info:=/mode_info_test'"
+        output: ['can_info','mode_info']
+    vehicle_sender:
+        input: "'vehicle_sender_topics.bag'"
+        output: []
+    g30esli_interface:
+        input: "'g30esli_interface_topics.bag', '/vehicle/battery:=/vehicle/battery_test', '/vehicle/twist:=/vehicle/twist_test', '/vehicle_status:=/vehicle_status_test'"
+        output: ['vehicle/battery','vehicle/twist','vehicle_status']
+    mtdevice:
+        input: "'mtdevice_topics.bag'"
+        output: []
+    mtnode:
+        input: "'mtnode_topics.bag', '/imu_raw:=/imu_raw_test', '/mti/sensor/sample:=/mti/sensor/sample_test', '/mti/sensor/magnetic:=/mti/sensor/magnetic_test', '/mti/sensor/pressure:=/mti/sensor/pressure_test', '/mti/sensor/gnssPvt:=/mti/sensor/gnssPvt_test', '/mti/filter/orientation:=/mti/filter/orientation_test', '/mti/filter/velocity:=/mti/filter/velocity_test', '/mti/filter/position:=/mti/filter/position_test', '/temperature:=/temperature_test'"
+        output: ['imu_raw','mti/sensor/sample','mti/sensor/magnetic','mti/sensor/pressure','mti/sensor/gnssPvt','mti/filter/orientation','mti/filter/velocity','mti/filter/position','temperature']
+    can_converter:
+        input: "'can_converter_topics.bag'"
+        output: []
+    can_draw:
+        input: "'can_draw_topics.bag', '/can_status:=/can_status_test'"
+        output: ['can_status']
+    can_listener:
+        input: "'can_listener_topics.bag', '/can_raw:=/can_raw_test'"
+        output: ['can_raw']
+    garmin_gps_18x_lvc:
+        input: "'garmin_gps_18x_lvc_topics.bag', '/nmea_sentence:=/nmea_sentence_test', '/gpstime:=/gpstime_test'"
+        output: ['nmea_sentence','gpstime']
+    imu:
+        input: "'imu_topics.bag', '/data_raw:=/data_raw_test'"
+        output: ['data_raw']
+    adxl345_node:
+        input: "'adxl345_node_topics.bag', '/data_raw:=/data_raw_test'"
+        output: ['data_raw']
+    javad_serial_driver:
+        input: "'javad_serial_driver_topics.bag'"
+        output: []
+    javad_topic_driver:
+        input: "'javad_topic_driver_topics.bag'"
+        output: []
+    javad_topic_serial_reader:
+        input: "'javad_topic_serial_reader_topics.bag', '/nmea_sentence:=/nmea_sentence_test'"
+        output: ['nmea_sentence']
+    microstrain_3dm_gx5_15:
+        input: "'microstrain_3dm_gx5_15_topics.bag', '/gps/fix:=/gps/fix_test', '/imu_raw:=/imu_raw_test', '/nav/odom:=/nav/odom_test', '/nav/status:=/nav/status_test'"
+        output: ['gps/fix','imu_raw','nav/odom','nav/status']
+    microstrain_3dm_gx5_45_node:
+        input: "'microstrain_3dm_gx5_45_node_topics.bag', '/gps/fix:=/gps/fix_test', '/imu_raw:=/imu_raw_test', '/nav/odom:=/nav/odom_test', '/nav/status:=/nav/status_test'"
+        output: ['gps/fix','imu_raw','nav/odom','nav/status']
+    pacmod_interface:
+        input: "'pacmod_interface_topics.bag', '/as/arbitrated_steering_commands:=/as/arbitrated_steering_commands_test', '/as/arbitrated_speed_commands:=/as/arbitrated_speed_commands_test', '/as_current_twist:=/as_current_twist_test'"
+        output: ['as/arbitrated_steering_commands','as/arbitrated_speed_commands','as_current_twist']
+    vlg22c:
+        input: "'vlg22c_topics.bag', '/camera/*/image_raw:=/camera/*/image_raw_test'"
+        output: ['camera/*/image_raw']
+    vg440_node:
+        input: "'vg440_node_topics.bag', '/imu_raw:=/imu_raw_test'"
+        output: ['imu_raw']
+    vectacam:
+        input: "'vectacam_topics.bag', '/camera/image_raw:=/camera/image_raw_test', '/image_raw:=/image_raw_test'"
+        output: ['camera/image_raw','image_raw']
+    grasshopper3:
+        input: "'grasshopper3_topics.bag', '/camera/camera_info:=/camera/camera_info_test', '/camera/image_raw:=/camera/image_raw_test'"
+        output: ['camera/camera_info','camera/image_raw']
+    ladybug:
+        input: "'ladybug_topics.bag', '/camera/camera_info:=/camera/camera_info_test', '/camera/image_raw:=/camera/image_raw_test'"
+        output: ['camera/camera_info','camera/image_raw']
+    hokuyo_3d:
+        input: "'hokuyo_3d_topics.bag', '/points_raw:=/points_raw_test', '/imu:=/imu_test', '/mag:=/mag_test'"
+        output: ['points_raw','imu','mag']
+    gmsl_camera_interface:
+        input: "'gmsl_camera_interface_topics.bag', '/image_raw:=/image_raw_test'"
+        output: ['image_raw']
+    driveworks_tensorrt_interface:
+        input: "'driveworks_tensorrt_interface_topics.bag', '/obj_car/image_obj:=/obj_car/image_obj_test'"
+        output: ['obj_car/image_obj']

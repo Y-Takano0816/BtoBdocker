@@ -1,0 +1,81 @@
+import subprocess
+import time
+import signal
+
+
+try:
+
+    autoware_path = '/home/autoware/Autoware'
+
+    tf_out_file = open('log/tf_out.log', 'w')
+    tf_err_file = open('log/tf_err.log', 'w')
+    tf_loader = subprocess.Popen('. ' + autoware_path + '/install/setup.sh; roslaunch tf/tf.launch', shell=True, stdout=tf_out_file, stderr=tf_err_file)
+
+    points_map_loader_out_file = open('log/points_map_loader_out.log', 'w')
+    points_map_loader_err_file = open('log/points_map_loader_err.log', 'w')
+    point_map_loader = subprocess.Popen('. ' + autoware_path + '/install/setup.sh; rosrun map_file points_map_loader noupdate pointcloud_map/0.2-bin/*.pcd', shell=True, stdout=points_map_loader_out_file, stderr=points_map_loader_err_file)
+
+    vector_map_loader_out_file = open('log/vector_map_loader_out.log', 'w')
+    vector_map_loader_err_file = open('log/vector_map_loader_err.log', 'w')
+    vector_map_loader = subprocess.Popen('. ' + autoware_path + '/install/setup.sh; rosrun map_file vector_map_loader vector_map/Ver1.20/*.csv', shell=True, stdout=vector_map_loader_out_file, stderr=vector_map_loader_err_file)
+
+  #  input('twist_filterノードを起動し、Enterを押してください。')
+
+
+
+
+#{{ target_node }}の入力ここから
+    rosbag_play = subprocess.Popen(['rosbag', 'play', {{ root[target_node]['input'] }}], stdin=subprocess.DEVNULL)
+#{{ target_node }}の入力ここまで
+
+#{{ target_node }}の出力ここから
+{% for item in root[target_node] ['output'] %}
+    {{ item }}_test_file = open('result/{{ item }}_test', 'w')
+    dump_{{ item }}_test = subprocess.Popen(['rostopic', 'echo', '/{{ item }}_test', '-p'], stdout={{ item }}_test_file)
+
+    {{ item }}_file = open('result/{{ item }}', 'w')
+    dump_{{ item }} = subprocess.Popen(['rostopic', 'echo', '/{{ item }}', '-p'], stdout={{ item }}_file)
+{% endfor %}
+#{{ target_node }}の出力ここまで
+
+
+
+
+
+    rosbag_play.wait()
+
+except KeyboardInterrupt:
+    rosbag_play.send_signal(signal.SIGINT)
+    rosbag_play.wait()
+
+finally:
+    time.sleep(1)
+
+
+
+#{{ target_node }}
+{% for item in root[target_node]['output'] %}
+dump_{{ item }}_test.send_signal(signal.SIGINT)
+dump_{{ item }}_test.wait()
+{{ item }}_test_file.close()
+
+dump_{{ item }}.send_signal(signal.SIGINT)
+dump_{{ item }}.wait()
+{{ item }}_file.close()
+{% endfor %}
+#{{ target_node }}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

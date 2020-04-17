@@ -1,0 +1,451 @@
+- name: /pure_pursuit
+  publish: [/twist_raw, /ctrl_cmd, /next_waypoint_mark, /next_target_mark,
+    /search_circle_mark, /line_point_mark, /trajectory_circle_mark]
+  subscribe: [/final_waypoints, /current_pose, /config/waypoint_follower,
+    /current_velocity]
+- name: /twist_filter
+  publish: [/twist_cmd]
+  subscribe: [/twist_raw, /config/twist_filter]
+- name: /twist_gate
+  publish: [/emergency_stop, /ctrl_mode, /vehicle_cmd, /state_cmd]
+  subscribe: [/remote_cmd, /twist_cmd, /mode_cmd, /gear_cmd, /accel_cmd,
+    /steer_cmd, /brake_cmd, /lamp_cmd, /ctrl_cmd]
+- name: /wf_simulator
+  publish: [/sim_pose, /sim_velocity]
+  subscribe: [/twist_cmd, /base_waypoints, /closest_waypoint,
+    /initialpose, /ndt_pose, /gnss_pose]
+- name: /vector_map_client
+  publish: [/vector_map_client]
+  subscribe: [/vector_map_info/*, /current_pose, /final_waypoints]
+  client: [/vector_map_server/get_white_line, /vector_map_server/get_stop_line,
+    /vector_map_server/get_cross_walk, /vector_map_server/get_signal]
+- name: /vector_map_server
+  publish: [/vector_map_server]
+  subscribe: [/vector_map_info/*]
+  server: [/vector_map_server/*]
+- name: /points_map_loader
+  publish: [/points_map, /pmap_stat]
+  subscribe: [/gnss_pose, /current_pose, /initialpose, /traffic_waypoints_array]
+- name: /vector_map_loader
+  publish: [/vector_map, /vmap_stat, /vector_map_info/*]
+- name: /grid_map_filter
+  publish: [/filtered_grid_map]
+  subscribe: [/realtime_cost_map]
+- name: /laserscan2costmap
+  publish: [/ring_ogm]
+  subscribe: [/scan]
+- name: /points2costmap
+  publish: [/realtime_cost_map]
+  subscribe: [/points_lanes, /obstacle_sim_pointcloud]
+- name: /potential_field
+  publish: [/potential_field]
+  subscribe: [/detected_objects, /vscan_points, /next_target_mark]
+- name: /wayarea2grid
+  publish: [/grid_map_wayarea, /occupancy_wayarea]
+  subscribe: []
+- name: /points2image
+  publish: [/points_image]
+  subscribe: [/points_raw, /projection_matrix, /camera/camera_info]
+- name: /points2vscan
+  publish: [/vscan_points, /scan]
+  subscribe: [/points_raw]
+- name: /vscan2image
+  publish: [/vscan_image]
+  subscribe: [/vscan_points, /projection_matrix_topic, /camera/camera_info]
+- name: /vscan2linelist
+  publish: [/vscan_linelist]
+  subscribe: [/vscan_points]
+- name: /ff_waypoint_follower
+  publish: [/twist_raw, /wf_stat, /curr_simu_pose, /follow_pose, /sim_pose, /sim_velocity,
+    /twist_cmd, /ControlBoxOdom, /linear_velocity_viz]
+  subscribe: [/initialpose, /current_pose, /odom, /current_velocity, /current_behavior,
+    /final_waypoints, /usb_controller_r_signal]
+- name: /astar_navi
+  publish: [/astar_path, /lane_waypoints_array, /debug_pose_array]
+  subscribe: [/ring_ogm, /current_pose, /move_base_simple/goal]
+- name: /op_trajectory_generator
+  publish: [/final_waypoints, /base_waypoints, /local_trajectories]
+  subscribe: [/initialpose, /current_pose, /odom, /current_velocity,
+    /can_info, /lane_waypoints_array]
+- name: /lane_navi
+  publish: [/lane_waypoints_array]
+  subscribe: [/route_cmd, /vector_map_info/point, /vector_map_info/lane, /vector_map_info/node]
+- name: /lane_rule
+  publish: [/traffic_waypoints_array, /red_waypoints_array, /green_waypoints_array]
+  subscribe: [/lane_waypoints_array, /vector_map_info/point, /vector_map_info/lane,
+    /vector_map_info/node, /vector_map_info/stop_line, /vector_map_info/dtlane, /config/lane_rule]
+- name: /lane_select
+  publish: [/base_waypoints, /closest_waypoint]
+  subscribe: [/traffic_waypoints_array, /current_pose, /current_velocity, /state,
+    /config/lane_select, /decisionmaker/states]
+- name: /lane_stop
+  publish: [/traffic_waypoints_array]
+  subscribe: [/light_color, /light_color_managed, /red_waypoints_array,
+    /green_waypoints_array, /config/lane_stop]
+- name: /op_data_logger
+  subscribe: [/predicted_objects, /current_behavior, /simu_car_path_beh_i,/sim_box_pose_i]
+- name: /op_pose2tf
+  publish: [/reset_time, tf]
+  subscribe: [/ndt_pose]
+- name: /op_bag_player
+  publish: [/ndt_pose, /points_raw, /image_raw]
+- name: /obstacle_avoid
+  publish: [/astar_path, /safety_waypoints, /astar_debug_poses, /astar_footprint]
+  subscribe: [/grid_map_visualization/distance_transform, /current_pose, /move_base_simple/goal]
+- name: /velocity_set
+  publish: [/detection_range, /obstacle, /obstacle_waypoint, /astar/final_waypoints,
+    /final_waypoints]
+  subscribe: [/safety_waypoints, /current_velocity, /config/velocity_set, /points_no_ground,
+    /localizer_pose, /current_pose, /state/stopline_wpid, /vector_map_info/*]
+- name: /decision_maker_node
+  publish: [/state/stopline_wpidx, /state, /lane_waypoints_array, /decisionmaker/states, /light_color_managed,
+    /lamp_cmd, /decision_maker/state_overlay, /state/cross_road_marker, /state/cross_inside_marker, /state/crossroad_bbox,
+    /state/detection_area, /state/stopline_target, /target_velocity_array, /state/val_diff_distance,
+    /state/exectime]
+  subscribe: [/sim_pose, /current_pose, /current_velocity, /light_color, /filtered_points, /final_waypoints,
+    /twist_cmd, /change_flag, /state_cmd, /closest_waypoint, /cloud_clusters, /config/decision_maker,
+    /vector_map_info/*, /based/lane_waypoints_array]
+- name: /waypoint_clicker
+  publish: [/waypoint_guide]
+  subscribe: [/clicked_point, /vector_map_info/point, /vector_map_info/lane,
+    /vector_map_info/node]
+- name: /waypoint_loader
+  publish: [/based/lane_waypoint_raw]
+  subscribe: []
+- name: /waypoint_replanner
+  publish: [/based/lane_waypoint_array, /lane_waypoints_array]
+  subscribe: [/based/lane_waypoint_raw]
+- name: /waypoints_marker_publisher
+  publish: [/local_waypoints_mark, /global_waypoints_mark]
+  subscribe: [/light_color, /light_color_managed, /lane_waypoints_array,
+    /traffic_waypoints_array, /final_waypoints, /closest_waypoint,
+    /config/lane_stop]
+- name: /waypoint_saver
+  publish: [/waypoint_saver_marker]
+  subscribe: [/current_pose, /current_velocity]
+- name: /waypoint_velocity_visualizer
+  publish: [/waypoints_velocity]
+  subscribe: [/base_waypoints, /final_waypoints, /current_pose, /current_velocity,
+    /twist_cmd]
+- name: /way_planner
+  publish: [/lane_waypoints_array, /global_waypoints_rviz, /Global_StartPoint_rviz,
+    /Global_GoalPoints_rviz, /Goal_Nodes_Points_rviz, /vector_map_center_lines_rviz,
+    /Traffic_Lights_rviz]
+  subscribe: [/initialpose, /move_base_simple/goal, /current_pose, /odom, /current_velocity,
+    /can_info, /GlobalNodesList, /vector_map_info/*]
+- name: /lattice_trajectry_gen
+  publish: [/next_waypoint_mark, /wf_stat, /spline, /state, /cubic_splines_viz]
+  subscribe: [/final_waypoints, /current_pose, /current_velocity, /config/waypoint_follower,
+    /can_info]
+- name: /command_converter
+  publish: [/twist_raw]
+  subscribe: [/spline, /state]
+- name: /lattice_velocity_set
+  publish: [/detection_range, /sound_player, /temporal_waypoints, /closest_waypoint,
+    /obstacle]
+  subscribe: [/localizer_pose, /current_pose, /vscan_points, /base_waypoints,
+    /obj_pose, /current_velocity, /config/lattice_velocity_set,
+    /vector_map_info/*]
+- name: /path_select
+  publish: [/final_waypoints]
+  subscribe: [/temporal_waypoints]
+- name: /dp_planner
+  publish: [/local_trajectories_dynamic, /enableLattice, /final_waypoints, /base_waypoints,
+    /closest_waypoint, /current_behavior, /global_plan_nodes, /GlobalStartpose,
+    /GlobalGoalPose, /global_plan_start, /global_plan_goal, /detected_polygons,
+    /dp_planner_tracked_boxes, /local_trajectories, /testing_line, /behavior_state,
+    /safety_border, /simu_points_cluster, /sim_box_pose_ego]
+  subscribe: [/initialpose, /current_pose, /cloud_clusters, /bounding_boxes,
+    /realtime_cost_map, /odom, /current_velocity, /can_info, /emergency_stop_signal,
+    /traffic_signal_info, /usb_controller_r_signal, /astar_path, /lane_waypoints_array,
+    /vector_map_info/*, /clicked_point, /lane_waypoints_array]
+- name: /can_uploader
+  publish: []
+  subscribe: [/can_info]
+- name: /obj_downloader
+  publish: [/mo_pictograms]
+  subscribe: []
+- name: /obj_uploader
+  publish: []
+  subscribe: [/car_pose, /pedestrian_pose, /current_pose]
+- name: naive_motion_predict
+  publish: [/prediction/objects]
+  subscribe: [/detection/objects]
+- name: lidar_fake_percetion
+  publish: [/fake_objects, /fake_points]
+  subscribe: [/move_base_simple/goal, /detected_objects, /points_raw, /fake_twist]
+- name: local2global
+  publish: [/current_pose, /ndt_map]
+  subscribe: [/config/ndt, /gnss_pose, /points_map]
+- name: ndt_mapping
+  publish: [/ndt_map, /current_pose]
+  subscribe: [/config/ndt_mapping, /config/ndt_mapping_output, /points_raw]
+- name: queue_counter
+  publish: []
+  subscribe: [/points_raw, /ndt_map]
+- name: ndt_matching
+  publish: [/predict_pose, /ndt_pose, /localizer_pose,
+    /estimate_twist, /estimated_vel_mps, /estimated_vel_kmph, /estimated_vel, /time_ndt_matching,
+    /ndt_stat, /ndt_reliability]
+  subscribe: [/config/ndt, /gnss_pose, /points_map, /initialpose, /filtered_points]
+- name: icp_matching
+  publish: [/predict_pose, /icp_pose, /localizer_pose,
+    /estimate_twist, /estimated_vel_mps, /estimated_vel_kmph, /estimated_vel, /time_icp_matching,
+    /icp_stat]
+  subscribe: [/config/icp, /gnss_pose, /points_map, /initialpose, /filtered_points]
+- name: vision_darknet_detect
+  publish: [/detected_objects]
+  subscribe: [/config/Yolo3, /image_raw]
+- name: /occupancy_processor_01
+  publish: [/gridmap_road_status, /occupancy_road_status]
+  subscribe: [/grid_map_wayarea]
+- name: /can_info_translator
+  publish: [/can_velocity, /linear_velocity_viz, /odom_pose]
+  subscribe: [/can_info]
+- name: dpm_ocv
+  publish: [/obj_X/image_obj]
+  subscribe: [/config/obj_X/dpm, /image_raw]
+- name: dpm_ttic
+  publish: [/obj_X/image_obj]
+  subscribe: [/config/obj_X/dpm, /image_raw]
+- name: kf_track
+  publish: [/obj_X/image_obj_tracked]
+  subscribe: [/config/obj_X/kf, /image_raw, /obj_X/image_obj_ranged]
+- name: klt_track
+  publish: [/obj_X/image_obj_tracked]
+  subscribe: [/config/obj_X/klt, /image_raw, /obj_X/image_obj_ranged]
+- name: obj_reproj
+  publish: [/obj_X/obj_label, /obj_X/obj_label_marker]
+  subscribe: [/obj_X/image_obj_tracked, /current_pose, /projection_matrix, /camera/camera_info]
+- name: range_fusion
+  publish: [/obj_X/image_obj_ranged]
+  subscribe: [/config/obj_X/fusion, /obj_X/image_obj, /points_image]
+- name: /image_rectifier*
+  publish: [/image_rectified]
+  subscribe: [/image_raw, /camera_info]
+- name: /image_rotator*
+  publish: [/image_rotated]
+  subscribe: [/image_raw]
+- name: lidar_kf_contour_track
+  publish: [/detected_objects, /detected_polygons, /op_planner_tracked_boxes]
+  subscribe: [/cloud_clusters, /current_pose]
+- name: /line_ocv
+  publish: [/lane_pos_xy]
+  subscribe: [/image_raw]
+- name: lidar_euclidean_cluster_detect
+  publish: [/detection/lidar_objects/l_shaped]
+  subscribe: [/detection/lidar_objects]
+- name: /pos_downloader
+  publish: [/mo_pictograms]
+  subscribe: []
+- name: /pos_uploader
+  publish: []
+  subscribe: [/*/obj_pose, /current_pose]
+- name: /feature_projection
+  publish: [/roi_signal]
+  subscribe: [/vector_map_info/*, /camera/camera_info, /config/adjust_xy, /current_pose,
+    /final_waypoints]
+- name: /traffic_light_recognition
+  publish: [/camera_light_color, /sound_player, /tlr_result, /tlr_superimpose_image,
+    /tlr_result_array]
+  subscribe: [/image_raw, /roi_signal, /tuned_result, /config/superimpose]
+- name: /region_tlr_mxnet
+  publish: [/light_color, /sound_player, /tlr_result, /tlr_superimpose_image]
+  subscribe: [/image_raw, /roi_signal, /config/superimpose]
+- name: /region_tlr_ssd
+  publish: [/light_color, /sound_player, /tlr_result, /tlr_superimpose_image]
+  subscribe: [/image_raw, /roi_signal]
+- name: /roi_extractor
+  publish: []
+  subscribe: [/image_raw, /roi_signal]
+- name: /light_color_switch
+  publish: [/light_color]
+  subscribe: [/camera_light_color, /ams_light_color]
+- name: /tlr_tuner
+  publish: [/tuned_result]
+  subscribe: [/image_raw]
+- name: /distance_filter
+  publish: [/filtered_points, /points_downsampler_info]
+  subscribe: [/config/distance_filter, /points_raw]
+- name: /random_filter
+  publish: [/filtered_points, /points_downsampler_info]
+  subscribe: [/config/random_filter, /points_raw]
+- name: /ring_filter
+  publish: [/filtered_points, /points_downsampler_info]
+  subscribe: [/config/ring_filter, /points_raw]
+- name: /voxel_grid_filter
+  publish: [/filtered_points, /points_downsampler_info]
+  subscribe: [/config/voxel_grid_filter, /points_raw]
+- name: /cloud_transformer
+  publish: [/points_transformed]
+  subscribe: [/points_raw]
+- name: /points_concat_filter
+  publish: [/points_concat]
+  subscribe: [/config/points_concat_filter, /lidar*/points_raw]
+- name: /ray_ground_filter
+  publish: [/points_no_ground, /points_ground]
+  subscribe: [/points_raw, /config/ray_ground_filter]
+- name: /ring_ground_filter
+  publish: [/points_no_ground, /points_ground]
+  subscribe: [/config/ring_ground_filter, /points_raw]
+- name: /space_filter
+  publish: [/points_clipped]
+  subscribe: [/points_raw]
+- name: /compare_map_filter
+  publish: [/points_ground, /points_no_ground]
+  subscribe: [/config/compare_map_filter, /points_raw, /points_map]
+- name: lidar_euclidean_cluster_detect
+  publish: [/bounding_boxes,
+            /centroid_marker,
+            /cloud_clusters,
+            /cluster_centroids,
+            /detection/lidar_detector/objects_hulls,
+            /detection/lidar_detector/objects_markers,
+            /grid_map_wayarea,
+            /points_cluster,
+            /points_ground,
+            /points_lanes]
+  subscribe: [/grid_map_wayarea, /points_raw, /tf]
+- name: /fix2tfpose
+  publish: [/gnss_pose, /gnss_stat]
+  subscribe: [/fix]
+- name: /nmea2tfpose
+  publish: [/gnss_pose]
+  subscribe: [/nmea_sentence]
+- name: /map_extender
+  publish: [/extended_map]
+  subscribe: [/points_map, /initialpose]
+- name: /udon_receiver
+  publish: []
+  subscribe: []
+- name: /udon_sender
+  publish: []
+  subscribe: [/mode_info, /current_pose]
+- name: /sync_obj_fusion/*/sync_*_fusion
+  publish: [/sync_obj_fusion/*/obj_label, /sync_obj_fusion/*/cluster_centroids, 
+    /sync_obj_fusion/time_diff]
+  subscribe: [/*/obj_label, /cluster_centroids, /*/obj_pose]
+- name: /sync_tracking/*/sync_*_tracking
+  publish: [/sync_tracking/*/image_obj_ranged, /sync_tracking/*/image_raw,
+    /sync_tracking/time_diff]
+  subscribe: [/*/image_obj_ranged, /sync_drivers/image_raw,
+    /*/image_obj_tracked]
+- name: /sync_reprojection/*/sync_*_reprojection
+  publish: [/sync_reprojection/*/image_obj_tracked, /sync_reprojection/*/current_pose,
+    /sync_reprojection/time_diff]
+  subscribe: [/*/image_obj_tracked, /current_pose, /*/obj_label]
+- name: /sync_tracking/*/sync_*_ranging
+  publish: [/sync_ranging/*/image_obj, /sync_ranging/*/points_image, /sync_ranging/time_diff]
+  subscribe: [/*/image_obj, /points_image, /*/image_obj_ranged]
+- name: /sync_drivers/sync_drivers
+  publish: [/image_raw, /points_raw, /time_difference]
+  subscribe: [/image_raw, /points_raw]
+- name: /synchronization/*/time_monitor
+  publish: [/times]
+  subscribe: [/sync_drivers/image_raw, /sync_drivers/points_raw, /points_image,
+    /vscan_points, /vscan_image, /*/image_obj, /*/image_obj_ranged,
+    /*/image_obj_tracked, /current_pose, /*/obj_label, /cluster_centroids,
+    /*/obj_pose_timestamp, /sync_ranging/*/image_obj, /sync_tracking/*/image_obj_ranged,
+    /sync_reprojection/*/image_obj_tracked, /sync_obj_fusion/*/obj_label,
+    /time_difference]
+- name: /time_visualizer
+  publish: []
+  subscribe: [/synchronization/obj_car/times]
+- name: runtime_manager
+  publish: [/from_rtmgr, /accel_cmd, /brake_cmd, /gear_cmd, /indicator_cmd, /lamp_cmd,
+    /mode_cmd, /steer_cmd, /twist_cmd, /traffic_light, /config/adjust_xy, /config/X_dpm,
+    /config/X_kf, /config/X_fusion, /config/lane_rule, /config/lane_select, /config/ndt,
+    /config/ndt_mapping, /config/ndt_mapping_output, /config/superimpose,
+    /config/twist_filter, /config/velocity_set, /config/waypoint_follower]
+  subscribe: [/to_rtmgr, /ndt_stat, /topic1, /topic2, /route_cmd, /gnss_stat, /pmap_stat,
+    /vmap_stat, /lf_stat]
+- name: /pc2_downsampler
+  publish: [/downsampled_points_map, /downsampled_points_raw]
+  subscribe: [/points_map, /points_raw]
+- name: /tablet_receiver
+  publish: [/gear_cmd, /mode_cmd, /route_cmd, /gnss_pose, /gnss_stat]
+- name: /tablet_sender
+  subscribe: [/error_info, /can_info, /mode_info, /ndt_stat, /wf_stat]
+- name: /kitti_player
+  publish: [/grayscale/left/image_rect, /grayscale/right/image_rect,
+    /color/left/image_rect, /color/right/image_rect,
+    /hdl64e, /oxts/gps, /oxts/gps_initial, /oxts/imu, /preprocessed_disparity]
+- name: /multi_lidar_calibrator
+  publish: [/points_calibrated]
+  subscribe: [/lidar*/points_raw]
+- name: /marker_downsampler
+  publish: [/downsampled_trajectory_circle_mark, /downsampled_next_target_mark]
+  subscribe: [/trajectory_circle_mark, /next_target_mark]
+- name: /oculus_sender
+  publish: []
+  subscribe: [/current_pose, /*/obj_pose]
+- name: /kitti_box_publisher
+  publish: [/kitti_box, /obj_car/image_obj, /kitti_3d_labels, /points_cluster]
+  subscribe: [/kitti_player/hdl64e]
+- name: /mqtt_receiver
+  publish: [/remote_cmd]
+  subscribe: [/vehicle/1/remote_cmd]
+- name: /mqtt_pose_receiver
+  publish: [/current_pose]
+  subscribe: [/vehicle/1/current_pose, /tf/baselink, /tf/map]
+- name: /vehicle_receiver
+  publish: [/can_info, /mode_info]
+  subscribe: []
+- name: /vehicle_sender
+  publish: []
+  subscribe: [/vehicle_cmd]
+- name: /g30esli_interface
+  publish: [/vehicle/battery, /vehicle/twist, /vehicle_status]
+  subscribe: [/vehicle/engage, /vehicle_cmd]
+- {name: /mtdevice}
+- name: /mtnode
+  publish: [/imu_raw, /mti/sensor/sample, /mti/sensor/magnetic, /mti/sensor/pressure,
+    /mti/sensor/gnssPvt, /mti/filter/orientation, /mti/filter/velocity,
+    /mti/filter/position, /temperature]
+- name: /can_converter
+  subscribe: [/can_raw]
+- name: /can_draw
+  publish: [/can_status]
+  subscribe: [/can_raw]
+- name: /can_listener
+  publish: [/can_raw]
+- name: /garmin_gps_18x_lvc
+  publish: [/nmea_sentence, /gpstime]
+- name: /imu
+  publish: [/data_raw]
+- name: /adxl345_node
+  publish: [/data_raw]
+- {name: /javad_serial_driver}
+- name: /javad_topic_driver
+  subscribe: [/nmea_sentence]
+- name: /javad_topic_serial_reader
+  publish: [/nmea_sentence]
+- name: /microstrain_3dm_gx5_15
+  publish: [/gps/fix, /imu_raw, /nav/odom, /nav/status]
+  server: [/reset_kf]
+- name: /microstrain_3dm_gx5_45_node
+  publish: [/gps/fix, /imu_raw, /nav/odom, /nav/status]
+  server: [/reset_kf]
+- name: /pacmod_interface
+  publish: [/as/arbitrated_steering_commands, /as/arbitrated_speed_commands,
+    /as_current_twist]
+  subscribe: [/twist_cmd, /as/control_mode, /vehicle/steering_report]
+- name: /vlg22c
+  publish: [/camera/*/image_raw]
+  subscribe: []
+- name: /vg440_node
+  publish: [/imu_raw]
+- name: /vectacam
+  publish: [/camera/image_raw, /image_raw]
+- name: /grasshopper3
+  publish: [/camera/camera_info, /camera/image_raw]
+- name: /ladybug
+  publish: [/camera/camera_info, /camera/image_raw]
+- name: /hokuyo_3d
+  publish: [/points_raw, /imu, /mag]
+- name: /gmsl_camera_interface
+  publish: [/image_raw]
+  subscribe: []
+- name: /driveworks_tensorrt_interface
+  publish: [/obj_car/image_obj]
+  subscribe: [/image_raw]
