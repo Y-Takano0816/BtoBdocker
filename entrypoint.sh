@@ -1,5 +1,6 @@
 #!/bin/sh -l
 
-g++ -o hello hello_world.cpp
-./hello
+echo "Test"
 echo "Hello $1"
+time=$(date)
+echo "::set-output name=time::$time"
